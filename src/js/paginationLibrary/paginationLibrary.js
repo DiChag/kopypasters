@@ -1,3 +1,4 @@
+import svgArrows from "../../images/icons.svg";
 export default class PaginationLibrary {
         constructor(btnInPagination) {
                 this.totalElements = 0;
@@ -194,14 +195,14 @@ export default class PaginationLibrary {
                 let isArrowRight = "";
                 const li = document.createElement("li");
                 if (item === "arrow-left") {
-                        // const svg = document.createElement('svg');
-                        // svg.setAttribute('width', 16);
-                        // svg.setAttribute('heigth', 16);
-                        // const use = document.createElement('use');
-                        // use.setAttribute('href', './images/icons.svg#icon-heart');
-                        // svg.append(use);
-                        // txt = svg;
-                        txt = document.createTextNode("<-");
+                        const svg = document.createElement("svg");
+                        svg.setAttribute("width", 16);
+                        svg.setAttribute("heigth", 16);
+                        const use = document.createElement("use");
+                        use.setAttribute("href", `${svgArrows}#icon-arrow-left`);
+                        svg.append(use);
+                        txt = svg;
+                        // txt = document.createTextNode("<-");
                         item = this.currentPage - 1;
                         isArrowLeft = true;
                 } else if (item === "arrow-right") {
