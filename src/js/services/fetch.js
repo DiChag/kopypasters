@@ -44,7 +44,7 @@ export const fetchMovie = async ({ keyword, page }) => {
                 param.set("page", page);
         }
 
-        console.log(`${url}?${param.toString()}`);
+        // console.log(`${url}?${param.toString()}`);
         return axios.get(`${url}?${param.toString()}`);
 };
 
