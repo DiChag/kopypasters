@@ -82,19 +82,17 @@ function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
         refs.watchedBtn.classList.add("library-btn--active");
         clearGallery();
-        try {
-                // const watchedFilms = getWatchedFromLocalStorage();
-                const watchedFilms = test;
-                let perPage = calculatePerPageBasedOnInnerWidth();
-                instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
-                console.log(watchedFilms);
-                const markup = renderWatchedFilms(watchedFilms);
-                console.log(markup);
-                console.log(refs.gallery);
-                refs.gallery.insertAdjacentHTML("beforeend", markup);
-        } catch (e) {
-                displayMessage();
-        }
+
+        // const watchedFilms = getWatchedFromLocalStorage();
+        const watchedFilms = test;
+        let perPage = calculatePerPageBasedOnInnerWidth();
+        instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
+        console.log(watchedFilms);
+        const markup = renderWatchedFilms(watchedFilms);
+        console.log(markup);
+        console.log(refs.gallery);
+        refs.gallery.insertAdjacentHTML("beforeend", markup);
+
         // Get all cards
         const cards = document.querySelectorAll(".movies-section__card");
 
