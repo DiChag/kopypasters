@@ -24,19 +24,19 @@
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(100px, calc(100% - 184px));
+    grid-template-rows: minmax(100px, 1fr) 1fr;
     grid-template-areas: 
     "poster"
     "info"
     "buttons"; 
     row-gap: 20px;
-
+    min-height: 484px;
     max-height: calc(100vh - 80px);
 
     @include mq("tablet") {
 
         grid-template-columns: 1fr 1fr; 
-        grid-template-rows: 1fr 44px;
+        grid-template-rows: minmax(300px, 1fr) 44px;
         grid-template-areas: 
           "poster info"
           "poster buttons"; 
@@ -103,8 +103,8 @@
 
         @include mq("tablet") {
             width: 264px;
-            height: auto;
-            object-fit: cover;
+            // height: auto;
+            // object-fit: cover;
         }
 
         @include mq("desktop") {
