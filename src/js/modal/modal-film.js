@@ -176,41 +176,79 @@ const handleChangeStatus = (e) => {
 
 // Change style of buttons
 function setButtonStatus(btn, { watched, queued }) {
+        // Labels
+        const labelAddToWatched = "Add to Watched";
+        const labelRemoveWatched = "Remove watched";
+        const labelAddToQueued = "Add to Queue";
+        const labelRemoveQueued = "Remove queued";
+        const activeClass = "modal-detail__btn--active";
+
+        // Select button from argument
         switch (btn) {
+                // Watch button
                 case "watch-btn":
-                        refs.watchBtn.innerText = watched.bool ? "Add to Watched" : "Unwatched";
+                        !watched.bool
+                                ? refs.watchBtn.classList.add(activeClass)
+                                : refs.watchBtn.classList.remove(activeClass);
+                        refs.watchBtn.innerText = watched.bool
+                                ? labelAddToWatched
+                                : labelRemoveWatched;
                         break;
+
+                // Queue button
                 case "queue-btn":
-                        refs.queueBtn.innerText = queued.bool ? "Add to Queue" : "Unqueued";
+                        !queued.bool
+                                ? refs.queueBtn.classList.add(activeClass)
+                                : refs.queueBtn.classList.remove(activeClass);
+                        refs.queueBtn.innerText = queued.bool
+                                ? labelAddToQueued
+                                : labelRemoveQueued;
                         break;
+
+                // All buttons
                 default:
-                        refs.watchBtn.innerText = !watched.bool ? "Add to Watched" : "Unwatched";
-                        refs.queueBtn.innerText = !queued.bool ? "Add to Queue" : "Unqueued";
+                        watched.bool
+                                ? refs.watchBtn.classList.add(activeClass)
+                                : refs.watchBtn.classList.remove(activeClass);
+                        queued.bool
+                                ? refs.queueBtn.classList.add(activeClass)
+                                : refs.queueBtn.classList.remove(activeClass);
+                        refs.watchBtn.innerText = !watched.bool
+                                ? labelAddToWatched
+                                : labelRemoveWatched;
+                        refs.queueBtn.innerText = !queued.bool
+                                ? labelAddToQueued
+                                : labelRemoveQueued;
                         break;
         }
 }
 
-// Checking statuses
+// Look for movies in localstorage and return index and bool
 function checkLibrary(id) {
+        // Getting data from localstore
         let watchedFilms = getWatchedFromLocalStorage(WATCHED_STORE);
         let queuedFilms = getQueuedFromLocalStorage(QUEUED_STORE);
 
+        // If null - create empty array
         if (watchedFilms === null || watchedFilms === undefined) {
                 saveToStorage(WATCHED_STORE, []);
                 watchedFilms = [];
         }
-
+        // If null - create empty array
         if (queuedFilms === null || queuedFilms === undefined) {
                 saveToStorage(QUEUED_STORE, []);
                 queuedFilms = [];
         }
 
+        // Looking for id in the store
         let indexWatched = watchedFilms.findIndex((film) => film.id == id);
         let indexQueued = queuedFilms.findIndex((queued) => queued.id == id);
 
+        // Convert to boolean
         const isWatched = Boolean(indexWatched + 1);
         const isQueued = Boolean(indexQueued + 1);
 
+        // Return obj of statuses
         return {
                 watched: { bool: isWatched, index: indexWatched },
                 queued: { bool: isQueued, index: indexQueued },
