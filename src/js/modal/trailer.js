@@ -3,7 +3,7 @@ let trailer;
 
 // References to elements
 const refs = {
-        openTrailerBtn: document.querySelector(".modal-detail__trailer_btn"),
+        openTrailerBtn: document.querySelector(".modal-detail__trailer-btn"),
         backdropTrailer: document.querySelector(".backdrop_trailer"),
         youtubeLink: document.querySelector(".modal-detail__youtube-link"),
 };
