@@ -20,6 +20,7 @@
 .footer__link {
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .footer__link::after {
@@ -53,7 +54,7 @@
 .footer-modal__bg {
     background: #fff;
     position: relative;
-
+width: 80%;
     // width: 550px;
 
     @include mq(tablet) {
@@ -102,6 +103,7 @@
     right: 5px;
     background: transparent;
     border: none;
+    cursor: pointer;
 
     @include mq(tablet) {
         top: 11px;
@@ -130,9 +132,8 @@
     }
 
     &__card {
-        display: flex;
         width: 100%;
-        position: relative;
+        
 
         @media screen and (max-width: 767.98px) {
             &:not(:last-child) {
@@ -147,11 +148,13 @@
 }
 
 .team__caption {
-    display: flex;
+    padding-top: 10px;
+    box-shadow: 0px 1px 3px rgba(223, 217, 217, 0.12), 0px 1px 1px rgba(120, 110, 110, 0.14), 0px 2px 1px rgb(0 0 0 / 20%);
+    border-radius: 0px 0px 4px 4px;
+    padding-bottom: 10px;
     width: 100%;
-    height: 50px;
 
-    position: absolute;
+  
     bottom: 0;
     left: 0;
 
@@ -161,5 +164,16 @@
 
     font-size: 30px;
 
-    background-color: rgba(180, 180, 180, 0.7);
+    background-color: rgba(255, 188, 2, 0.977);
+}
+.team__photo{
+    border-radius: 4px 4px 0 0 ;
+}
+.team__title{
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1.17;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: black;
 }
