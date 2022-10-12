@@ -4,8 +4,9 @@ import initHeaderSearchForm from "./header/header";
 import { initLibrary } from "./library/library";
 export let isHome;
 
-// Wait the DOM is loaded
-document.addEventListener("DOMContentLoaded", function () {
+
+function init() {
+        console.log('init');
         isHome = document.title === "Kinoteka" ? true : false;
 
         // Init modal window for film details
@@ -26,4 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Init library
                 initLibrary();
         }
-});
+}
+
+// Wait the DOM is loaded
+document.addEventListener("DOMContentLoaded", init, { once: true });

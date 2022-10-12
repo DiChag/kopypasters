@@ -24,13 +24,13 @@ const genreList = loadFromStorage("genres");
 
 function calculatePerPageBasedOnInnerWidth() {
         if (window.innerWidth > 0 && window.innerWidth < 768) {
-                return (perPage = 4);
+                return 4;
         }
         if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-                return (perPage = 8);
+                return 8;
         }
         if (window.innerWidth >= 1200) {
-                return (perPage = 9);
+                return 9;
         }
 }
 
@@ -50,14 +50,15 @@ function showWatchedFilms() {
                 instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
                 const markup = renderWatchedFilms(watchedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
-        } catch (e) {
-                displayMessage();
-        }
-        // Get all cards
-        const cards = document.querySelectorAll(".movies-section__card");
 
-        // Add events to cards
-        attachOnloadToCards(cards);
+                // Get all cards
+                const cards = document.querySelectorAll(".movies-section__card");
+
+                // Add events to cards
+                attachOnloadToCards(cards);
+        } catch (error) {
+                console.log(error);
+        }
 }
 
 export function getWatchedFromLocalStorage() {
@@ -69,14 +70,12 @@ export function getWatchedFromLocalStorage() {
                 }
                 const parsedFilmsData = JSON.parse(savedFilms);
                 return parsedFilmsData;
-        } catch (e) {
-                console.log(e);
+        } catch (error) {
+                console.log(error);
         }
 }
 
 function renderWatchedFilms(watchedFilms) {
-        // console.log(firstIndexOfArray);
-        // console.log(lastIndexOfArray);
         instPagination.calculateIndexesOfArray();
 
         let markup = "";
