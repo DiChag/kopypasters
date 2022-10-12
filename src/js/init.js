@@ -2,12 +2,12 @@ import { getMovieByName_deb, getGenres } from "./movies/movies";
 import initModalFilmDetails from "./modal/modal-film";
 import initHeaderSearchForm from "./header/header";
 import { initLibrary } from "./library/library";
-// export let isHome;
+export let isHome;
 
 
 function init() {
         console.log('init');
-        // isHome = document.title === "Kinoteka" ? true : false;
+        isHome = document.title === "Kinoteka" ? true : false;
 
         // console.log(document.title);
         // Init modal window for film details
