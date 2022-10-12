@@ -40,8 +40,11 @@ function closeTrailerWindow() {
         refs.backdropTrailer.firstElementChild.src = "";
 }
 
+
+
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
+        let videoByOfficialTrailer, videoByTrailer, otherVideo;
         // Default button is disabled
         refs.openTrailerBtn.setAttribute("disabled", true);
         refs.youtubeIconOnPosetr.style.display = "none";
@@ -51,12 +54,21 @@ function parseTrailers(trailersList) {
         }
 
         for (const video of trailersList) {
-                if (video.name.includes("Official Trailer")
-                    || video.name.includes("Trailer")) {
-                        refs.openTrailerBtn.removeAttribute("disabled");
-                        refs.youtubeIconOnPosetr.style.display = "block";
-                        return `${YOUTUBE_URL}${video.key}`;
-                }
-           
+                console.log(trailersList);
+                if (video.name.includes("Official Trailer")) {
+                        videoByOfficialTrailer = video.key }
+
+                 if (video.name.includes("Trailer")) {
+                        videoByTrailer = video.key;
+                 }
+                 if (video.name) {
+                        otherVideo = video.key;
+                }      
         }
+
+            if (videoByOfficialTrailer || videoByTrailer || otherVideo) {
+        refs.openTrailerBtn.removeAttribute("disabled");
+        refs.youtubeIconOnPosetr.style.display = "block";
+            return  `${YOUTUBE_URL}${videoByOfficialTrailer || videoByTrailer || otherVideo}`
+        }          
 }
