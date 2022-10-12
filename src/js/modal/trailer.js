@@ -43,7 +43,7 @@ function closeTrailerWindow() {
 function parseTrailers(trailersList) {
         // Default button is disabled
         refs.openTrailerBtn.setAttribute("disabled", true);
-        console.log(trailersList);
+
         if (trailersList.length === 0) {
                 return;
         }
