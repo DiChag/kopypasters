@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Init for Home page
         if (isHome) {
+                console.log(isHome);                
                 // Init search
                 initHeaderSearchForm();
 
