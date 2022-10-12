@@ -28,9 +28,13 @@
     cursor: pointer;
   }
 
+  &__item:not(:last-child) {
+    margin-right: 5px;
+  }
+
   &__item--arrow {
       background-position: center;
-      padding: 0;
+      padding: 12px;
       background-color: #f7f7f7;
   }
 
