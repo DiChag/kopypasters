@@ -50,7 +50,7 @@ function createRange (start, finish, pager) {
   const createItem = function (i) {
     return {
       value: i,
-      title: _config.lang === 'cn' ? `第${i}页` : `Page ${i}`,
+      title: `Page ${i}`,
       liClass: pager.current === i ? _config.activeClass : '',
       action (value) {
         internalAction(value, pager)
@@ -117,7 +117,7 @@ function createPreNext (pageCount, pager, mode) {
     var prevPage = pager.current - 1 <= 0 ? 1 : pager.current - 1
     item = {
       value: '⟨',
-      title: _config.lang === 'cn' ? '上一页' : 'Pre page',
+      title: 'Pre page',
       page: prevPage
     }
   } else {
@@ -126,7 +126,7 @@ function createPreNext (pageCount, pager, mode) {
 
     item = {
       value: '⟩',
-      title: _config.lang === 'cn' ? '下一页' : 'Next page',
+      title: 'Next page',
       page: nextPage
     }
   }
