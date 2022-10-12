@@ -7,6 +7,7 @@ const instPagination = new PaginationLibrary(9);
 instPagination.paginationContainer = "paginationLibrary";
 
 export function initLibrary() {
+        console.log('showWatchedFilms');
         showWatchedFilms();
 
         // EventListeners
@@ -47,8 +48,11 @@ function showWatchedFilms() {
         try {
                 const watchedFilms = getWatchedFromLocalStorage();
                 let perPage = calculatePerPageBasedOnInnerWidth();
-                instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
+                instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);                
+                console.log(watchedFilms);
                 const markup = renderWatchedFilms(watchedFilms);
+                console.log(markup);
+                console.log(refs.gallery);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
         } catch (e) {
                 displayMessage();
@@ -61,6 +65,7 @@ function showWatchedFilms() {
 }
 
 export function getWatchedFromLocalStorage() {
+        console.log('getWatchedFromLocalStorage');
         try {
                 const savedFilms = localStorage.getItem("watchedFilms");
                 if (!savedFilms && !savedFilms.length) {
@@ -75,6 +80,8 @@ export function getWatchedFromLocalStorage() {
 }
 
 function renderWatchedFilms(watchedFilms) {
+        console.log('renderWatchedFilms');
+        console.log(watchedFilms);
         // console.log(firstIndexOfArray);
         // console.log(lastIndexOfArray);
         instPagination.calculateIndexesOfArray();
@@ -99,6 +106,7 @@ function handleShowQueuedFilms() {
 
 // QUEUED
 function showQueuedFilms() {
+        console.log('showQueuedFilms');
         refs.queueBtn.classList.add("library-btn--active");
         refs.watchedBtn.classList.remove("library-btn--active");
         clearGallery();
@@ -114,6 +122,7 @@ function showQueuedFilms() {
 }
 
 export function getQueuedFromLocalStorage() {
+        console.log('getQueuedFromLocalStorage');
         try {
                 const savedFilms = localStorage.getItem("queuedFilms");
                 if (!savedFilms && !savedFilms.length) {
