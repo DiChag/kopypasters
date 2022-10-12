@@ -3,14 +3,10 @@ let trailer;
 
 // References to elements
 const refs = {
-        openTrailerBtn: document.querySelector('.modal-detail__trailer_btn'),
+        openTrailerBtn: document.querySelector(".modal-detail__trailer_btn"),
         backdropTrailer: document.querySelector(".backdrop_trailer"),
         youtubeLink: document.querySelector(".modal-detail__youtube-link"),
 };
-// Делаем кнопку открытия трейлера неактивной
-refs.openTrailerBtn.setAttribute('disabled', true);
-
-
 
 export function initTrailer(trailersList) {
         // Film trailer
@@ -23,8 +19,6 @@ export function initTrailer(trailersList) {
         // listeners for openTrailerBtn and backdrop
         refs.openTrailerBtn.addEventListener("click", openVideoTrailer);
         refs.backdropTrailer.addEventListener("click", closeTrailerWindow);
-
-
 }
 
 export function deattachTrailer() {
@@ -45,42 +39,19 @@ function closeTrailerWindow() {
         refs.backdropTrailer.firstElementChild.src = "";
 }
 
-
-
 // Get trailer video from videosList
-// function parseTrailers(trailersList) {
-//         console.log(trailersList);
-//         for (const video of trailersList) {
-            
-//                 if (video.name.includes("Official Trailer")) {
-//                 // refs.openTrailerBtn.removeAttribute('disabled')
-//                  return `${YOUTUBE_URL}${video.key}`;
-//             }
-//                 else if (video.name.includes("Trailer")) {
-//                 // refs.openTrailerBtn.removeAttribute('disabled')
-//                 return `${YOUTUBE_URL}${video.key}`
-//             }
-        
-//                 else if (trailersList.length === 0 || !video.name ) {
-//                         refs.openTrailerBtn.setAttribute('disabled', true);
-        
-//                 }
-//     }
-// }
-
-
 function parseTrailers(trailersList) {
+        // Default button is disabled
+        refs.openTrailerBtn.setAttribute("disabled", true);
         console.log(trailersList);
+        if (trailersList.length === 0) {
+                return;
+        }
+
         for (const video of trailersList) {
-            
-                if (video.name.includes("Official Trailer") ||
-                    video.name.includes("Trailer")) { 
-                  refs.openTrailerBtn.removeAttribute('disabled')
-                  return `${YOUTUBE_URL}${video.key}`;
+                if (video.name.includes("Official Trailer") || video.name.includes("Trailer")) {
+                        refs.openTrailerBtn.removeAttribute("disabled");
+                        return `${YOUTUBE_URL}${video.key}`;
                 }
-                else if (trailersList.length === 0 || !video.name ) {
-                        refs.openTrailerBtn.setAttribute('disabled', true);
-                        
-                }               
-    }
+        }
 }
