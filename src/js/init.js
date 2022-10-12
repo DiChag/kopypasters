@@ -2,18 +2,20 @@ import { getMovieByName_deb, getGenres } from "./movies/movies";
 import initModalFilmDetails from "./modal/modal-film";
 import initHeaderSearchForm from "./header/header";
 import { initLibrary } from "./library/library";
-export let isHome;
+// export let isHome;
 
-// Wait the DOM is loaded
-document.addEventListener("DOMContentLoaded", function () {
-        isHome = document.title === "Kinoteka" ? true : false;
 
+function init() {
+        console.log('init');
+        // isHome = document.title === "Kinoteka" ? true : false;
+
+        // console.log(document.title);
         // Init modal window for film details
         initModalFilmDetails();
 
         // Init for Home page
-        if (isHome) {
-                console.log(isHome);                
+        if (document.title === "Kinoteka") {
+                console.log(document.title);                
                 // Init search
                 initHeaderSearchForm();
 
@@ -24,7 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 getMovieByName_deb({ pagination: true });
                 return;
         } else {
+                console.log(document.title);  
                 // Init library
                 initLibrary();
         }
-});
+
+        document.removeEventListener("DOMContentLoaded", init);
+}
+
+// Wait the DOM is loaded
+document.addEventListener("DOMContentLoaded", init, { once: true });
