@@ -25,7 +25,7 @@ export function createMovieCard(movie, genreList) {
                 // backdrop_path,
                 poster_path,
                 title,
-                // name,
+                name,
                 // original_title,
                 genre_ids,
                 genres,
@@ -50,7 +50,7 @@ export function createMovieCard(movie, genreList) {
 
         // Cuts long strings
         genresStr = genresStr.length > 23 ? `${genresStr.slice(0, 23)}...` : genresStr;
-        let filmTitle = title;
+        let filmTitle = title || name;
         filmTitle = filmTitle.length > 23 ? `${filmTitle.slice(0, 23)}...` : filmTitle;
 
         // Preparing url, check posterImage on NULL
