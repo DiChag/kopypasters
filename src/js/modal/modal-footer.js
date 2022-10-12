@@ -1,3 +1,5 @@
+import { scrollableBody } from "../helpers";
+
 (() => {
         const refs = {
                 openModalBtn: document.querySelector("[data-footer-modal-open]"),
@@ -5,18 +7,14 @@
                 modal: document.querySelector("[data-modal]"),
         };
 
-        refs.openModalBtn.addEventListener("click", toggleModal);
-        // refs.closeModalBtn.addEventListener("click", toggleModal);
+        refs.openModalBtn.addEventListener("click", handleOpenModal);
 
-        function toggleModal(e) {
-                // console.log([e.target]);
-                if (e.target === refs.openModalBtn) {
-                        refs.modal.addEventListener("click", handleCloseModal);
-                        document.addEventListener("keydown", handleCloseModal);
-                }
-
+        function handleOpenModal(e) {
                 document.body.classList.toggle("modal-open");
                 refs.modal.classList.toggle("is-hidden");
+                scrollableBody(false);
+                refs.modal.addEventListener("click", handleCloseModal);
+                document.addEventListener("keydown", handleCloseModal);
         }
 
         function handleCloseModal(e) {
@@ -38,6 +36,8 @@
                                 return;
                         }
                 }
+
+                scrollableBody(true);
 
                 document.body.classList.toggle("modal-open");
                 refs.modal.classList.toggle("is-hidden");
