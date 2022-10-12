@@ -6,6 +6,7 @@ const refs = {
         openTrailerBtn: document.querySelector(".modal-detail__trailer-btn"),
         backdropTrailer: document.querySelector(".backdrop_trailer"),
         youtubeLink: document.querySelector(".modal-detail__youtube-link"),
+        youtubeIconOnPosetr: document.querySelector(".modal-detail__youtube-link"),
 };
 
 export function initTrailer(trailersList) {
@@ -43,15 +44,19 @@ function closeTrailerWindow() {
 function parseTrailers(trailersList) {
         // Default button is disabled
         refs.openTrailerBtn.setAttribute("disabled", true);
+        refs.youtubeIconOnPosetr.style.display = "none";
 
         if (trailersList.length === 0) {
                 return;
         }
 
         for (const video of trailersList) {
-                if (video.name.includes("Official Trailer") || video.name.includes("Trailer")) {
+                if (video.name.includes("Official Trailer")
+                    || video.name.includes("Trailer")) {
                         refs.openTrailerBtn.removeAttribute("disabled");
+                        refs.youtubeIconOnPosetr.style.display = "block";
                         return `${YOUTUBE_URL}${video.key}`;
                 }
+           
         }
 }
