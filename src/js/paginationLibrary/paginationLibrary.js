@@ -171,7 +171,12 @@ export default class PaginationLibrary {
                         ul.appendChild(this.createLi("arrow-right", totalOfBtn));
                 }
                 ul.addEventListener("click", (evt) => {
-                        if (evt.target.nodeName !== "LI") {
+                        // console.log(evt.target.nodeName);
+                        if (
+                                evt.target.nodeName !== "LI" &&
+                                evt.target.nodeName !== "svg" &&
+                                evt.target.nodeName !== "use"
+                        ) {
                                 return;
                         }
                         this.action(evt.target.dataset.page, renderCards);
@@ -200,22 +205,24 @@ export default class PaginationLibrary {
                         svg.setAttribute("width", 16);
                         svg.setAttribute("heigth", 16);
                         svg.setAttributeNS(null, "viewBox", "0 0 32 32");
-                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-left"></use>`;
+                        item = this.currentPage - 1;
+                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-left" data-page="${item}"></use>`;
                         svg.classList.add("paginationLibrary-list__icon");
                         txt = svg;
                         // txt = document.createTextNode("<-");
-                        item = this.currentPage - 1;
+                        svg.dataset.page = item;
                         isArrowLeft = true;
                 } else if (item === "arrow-right") {
                         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                         svg.setAttribute("width", 16);
                         svg.setAttribute("heigth", 16);
                         svg.setAttributeNS(null, "viewBox", "0 0 32 32");
-                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-right"></use>`;
+                        item = this.currentPage + 1;
+                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-right" data-page="${item}"></use>`;
                         svg.classList.add("paginationLibrary-list__icon");
                         txt = svg;
                         // txt = document.createTextNode("->");
-                        item = this.currentPage + 1;
+                        svg.dataset.page = item;
                         isArrowRight = true;
                 } else {
                         txt = document.createTextNode(item);
