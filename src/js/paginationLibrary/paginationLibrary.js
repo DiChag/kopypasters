@@ -1,3 +1,5 @@
+import iconsSVG from "../../images/icons.svg";
+
 export default class PaginationLibrary {
         constructor(btnInPagination) {
                 this.totalElements = 0;
@@ -147,7 +149,7 @@ export default class PaginationLibrary {
                 // this.currentPage = Number(currentPage);
                 this.clearPaginationLibrary();
                 const ul = document.createElement("ul");
-                ul.classList.add("pagination-list");
+                ul.classList.add("paginationLibrary-list");
                 // console.log("totalElements", totalElements);
                 // console.log("PerPage", perPage);
                 const totalOfBtn = Math.ceil(this.totalElements / this.perPage);
@@ -194,18 +196,25 @@ export default class PaginationLibrary {
                 let isArrowRight = "";
                 const li = document.createElement("li");
                 if (item === "arrow-left") {
-                        // const svg = document.createElement('svg');
-                        // svg.setAttribute('width', 16);
-                        // svg.setAttribute('heigth', 16);
-                        // const use = document.createElement('use');
-                        // use.setAttribute('href', './images/icons.svg#icon-heart');
-                        // svg.append(use);
-                        // txt = svg;
-                        txt = document.createTextNode("<-");
+                        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                        svg.setAttribute("width", 16);
+                        svg.setAttribute("heigth", 16);
+                        svg.setAttributeNS(null, "viewBox", "0 0 32 32");
+                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-left"></use>`;
+                        svg.classList.add("paginationLibrary-list__icon");
+                        txt = svg;
+                        // txt = document.createTextNode("<-");
                         item = this.currentPage - 1;
                         isArrowLeft = true;
                 } else if (item === "arrow-right") {
-                        txt = document.createTextNode("->");
+                        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                        svg.setAttribute("width", 16);
+                        svg.setAttribute("heigth", 16);
+                        svg.setAttributeNS(null, "viewBox", "0 0 32 32");
+                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-right"></use>`;
+                        svg.classList.add("paginationLibrary-list__icon");
+                        txt = svg;
+                        // txt = document.createTextNode("->");
                         item = this.currentPage + 1;
                         isArrowRight = true;
                 } else {
@@ -214,6 +223,9 @@ export default class PaginationLibrary {
                 // console.log(txt);
                 li.appendChild(txt);
                 li.classList.add("paginationLibrary-list__item");
+                if (isArrowRight || isArrowLeft) {
+                        li.classList.add("paginationLibrary-list__item--arrow");
+                }
                 if (
                         item === "..." ||
                         (isArrowLeft === true && this.currentPage === 1) ||
