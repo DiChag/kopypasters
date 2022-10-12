@@ -8,7 +8,8 @@ instPagination.paginationContainer = "paginationLibrary";
 
 export function initLibrary() {
         showWatchedFilms();
-        // eventListeners
+
+        // EventListeners
         refs.watchedBtn.addEventListener("click", handleShowWatchedFilms);
         refs.queueBtn.addEventListener("click", handleShowQueuedFilms);
 }
@@ -33,11 +34,6 @@ function calculatePerPageBasedOnInnerWidth() {
         }
 }
 
-// const queuedFilms = [];
-
-// localStorage.setItem("watchedFilms", JSON.stringify(watchedFilms));
-// localStorage.setItem("queuedFilms", JSON.stringify(queuedFilms));
-
 function handleShowWatchedFilms() {
         instPagination.current = 1;
         showWatchedFilms();
@@ -48,16 +44,15 @@ function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
         refs.watchedBtn.classList.add("library-btn--active");
         clearGallery();
-        const watchedFilms = getWatchedFromLocalStorage();
-        if (watchedFilms.length === 0) {
+        try {
+                const watchedFilms = getWatchedFromLocalStorage();
+                let perPage = calculatePerPageBasedOnInnerWidth();
+                instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
+                const markup = renderWatchedFilms(watchedFilms);
+                refs.gallery.insertAdjacentHTML("beforeend", markup);
+        } catch (e) {
                 displayMessage();
-                return;
         }
-        const perPage = calculatePerPageBasedOnInnerWidth();
-        instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
-        const markup = renderWatchedFilms(watchedFilms);
-        refs.gallery.insertAdjacentHTML("beforeend", markup);
-
         // Get all cards
         const cards = document.querySelectorAll(".movies-section__card");
 
@@ -68,8 +63,11 @@ function showWatchedFilms() {
 export function getWatchedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("watchedFilms");
+                if (!savedFilms && !savedFilms.length) {
+                        console.log("there is nothing with such a key!!! and it is empty");
+                        throw new Error("There is no data in local storage.");
+                }
                 const parsedFilmsData = JSON.parse(savedFilms);
-                // console.log(parsedFilmsData);
                 return parsedFilmsData;
         } catch (e) {
                 console.log(e);
@@ -104,22 +102,26 @@ function showQueuedFilms() {
         refs.queueBtn.classList.add("library-btn--active");
         refs.watchedBtn.classList.remove("library-btn--active");
         clearGallery();
-        const queuedFilms = getQueuedFromLocalStorage();
-        if (queuedFilms.length === 0) {
+        try {
+                const queuedFilms = getQueuedFromLocalStorage();
+                let perPage = calculatePerPageBasedOnInnerWidth();
+                instPagination.initPagination(queuedFilms.length, perPage, showQueuedFilms);
+                const markup = renderQueuedFilms(queuedFilms);
+                refs.gallery.insertAdjacentHTML("beforeend", markup);
+        } catch (e) {
                 displayMessage();
-                return;
         }
-        const perPage = calculatePerPageBasedOnInnerWidth();
-        instPagination.initPagination(queuedFilms.length, perPage, showQueuedFilms);
-        const markup = renderQueuedFilms(queuedFilms);
-        refs.gallery.insertAdjacentHTML("beforeend", markup);
 }
 
 export function getQueuedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("queuedFilms");
+                if (!savedFilms && !savedFilms.length) {
+                        console.log("there is nothing with such a key!!! and it is empty");
+                        throw new Error("There is no data in local storage.");
+                }
                 const parsedFilmsData = JSON.parse(savedFilms);
-                // console.log(parsedFilmsData);
+
                 return parsedFilmsData;
         } catch (e) {
                 console.log(e);
