@@ -3,7 +3,7 @@ let trailer;
 
 // References to elements
 const refs = {
-        openTrailerBtn: document.querySelector('[data-action="openTrailerVideo"]'),
+        openTrailerBtn: document.querySelector(".modal-detail__trailer-btn"),
         backdropTrailer: document.querySelector(".backdrop_trailer"),
         youtubeLink: document.querySelector(".modal-detail__youtube-link"),
 };
@@ -41,18 +41,17 @@ function closeTrailerWindow() {
 
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
-    for (const video of trailersList) {
-            // заменяем if (video.name === "Official Trailer")===============================================
-            if (video.name.includes("Official Trailer")) {
-                    return `${YOUTUBE_URL}${video.key}`;
-            }
-            else if (video.name.includes("Trailer")) {
-                    return `${YOUTUBE_URL}${video.key}`
-            }
-            else if (video.name) {
-                    return `${YOUTUBE_URL}${video.key}`
-            } 
-                    
-    }
-}
+        // Default button is disabled
+        refs.openTrailerBtn.setAttribute("disabled", true);
 
+        if (trailersList.length === 0) {
+                return;
+        }
+
+        for (const video of trailersList) {
+                if (video.name.includes("Official Trailer") || video.name.includes("Trailer")) {
+                        refs.openTrailerBtn.removeAttribute("disabled");
+                        return `${YOUTUBE_URL}${video.key}`;
+                }
+        }
+}
