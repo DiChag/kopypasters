@@ -26,22 +26,10 @@
 }
 
 body.dark-theme {
-    & .movies-section {
-        background-color: #272e34;
-    }
+    // Головний колір body
+    background-color: #272e34;
 
-    & .movies-section__title {
-        color: #fff;
-    }
-
-    & .movie__title {
-        color: #fff;
-    }
-
-    & .pagination li {
-        background-color: #ff6b01c2;
-    }
-
+    // Стилізація кнопки
     & .theme-toggle__icon-sun {
         display: block;
     }
@@ -50,6 +38,47 @@ body.dark-theme {
         display: none;
     }
 
+    // Головна сторінка
+    & .movies-section {
+        border-top: 1px solid #ae191b;
+    }
+
+    & .movies-section__image {
+        box-shadow: rgba(204, 204, 204, 0.25) 2px 2px 25px 2px;
+    }
+
+    & .movies-section__title {
+        color: #fff;
+    }
+
+    & .next-card__title {
+        color: #fff;
+    }
+
+    & .pagination li {
+        background-color: #ff6b01c2;
+    }
+
+    & .footer {
+        background-color: #272e34;
+    }
+
+    & .footer__text,
+    & .footer__link {
+        color: #fff;
+
+    }
+
+    // Модальне вікно футера
+    & .footer-modal__title {
+        color: #272e34;
+    }
+
+    & .footer-modal__bg {
+        background-color: #3d3a2c;
+    }
+
+    // Модальне вікно картки
     & .modal-detail {
         background-color: #272e34;
     }
@@ -70,6 +99,7 @@ body.dark-theme {
     & .modal-detail__article {
         color: #fff;
     }
+
     & .movies-section__message {
         color: #fff;
     }
