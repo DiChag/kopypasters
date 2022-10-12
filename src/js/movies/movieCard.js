@@ -49,9 +49,9 @@ export function createMovieCard(movie, genreList) {
         }
 
         // Cuts long strings
-        genresStr = genresStr.length > 24 ? `${genresStr.slice(0, 24)}...` : genresStr;
+        genresStr = genresStr.length > 23 ? `${genresStr.slice(0, 23)}...` : genresStr;
         let filmTitle = title;
-        filmTitle = filmTitle.length > 24 ? `${filmTitle.slice(0, 24)}...` : filmTitle;
+        filmTitle = filmTitle.length > 23 ? `${filmTitle.slice(0, 23)}...` : filmTitle;
 
         // Preparing url, check posterImage on NULL
         let posterImage = PREFIX_POSTER_URL;
@@ -94,7 +94,7 @@ export function createMovieCard(movie, genreList) {
                                         }">${date || "No date"}</span>
                                         
                                         ${
-                                                !isHome
+                                                !isHome && vote_average
                                                         ? `
                                                         <span class="movies-section__voteAverage">                                                        
                                                                 ${
@@ -102,7 +102,7 @@ export function createMovieCard(movie, genreList) {
                                                                                 ? vote_average.toFixed(
                                                                                           1,
                                                                                   )
-                                                                                : "No vote"
+                                                                                : ""
                                                                 }
                                                         </span>
                                                 `
