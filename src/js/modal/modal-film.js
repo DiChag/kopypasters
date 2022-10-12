@@ -292,6 +292,8 @@ function closeModal(e) {
 
         // Deattach trailer
         deattachTrailer();
+
+        // For library
         if (!isHome) {
                 const watchedButtonEl = document.querySelector("[data-action='watched']");
                 if (watchedButtonEl.classList.contains("library-btn--active")) {
