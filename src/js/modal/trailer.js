@@ -23,19 +23,19 @@ export function initTrailer(trailersList) {
 }
 
 export function deattachTrailer() {
-        // Deattach events
+        // Deattach events        
         refs.openTrailerBtn.removeEventListener("click", openVideoTrailer);
         refs.backdropTrailer.removeEventListener("click", closeTrailerWindow);
 }
 
 // function that opens videoTrailer
-function openVideoTrailer() {
+function openVideoTrailer() {        
         refs.backdropTrailer.classList.remove("unshown");
         refs.backdropTrailer.firstElementChild.src = trailer;
 }
 
 // function that closes videoTrailer
-function closeTrailerWindow() {
+function closeTrailerWindow() {        
         refs.backdropTrailer.classList.add("unshown");
         refs.backdropTrailer.firstElementChild.src = "";
 }
@@ -54,7 +54,6 @@ function parseTrailers(trailersList) {
         }
 
         for (const video of trailersList) {
-                console.log(trailersList);
                 if (video.name.includes("Official Trailer")) {
                         videoByOfficialTrailer = video.key }
 
