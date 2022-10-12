@@ -12,6 +12,9 @@
 }
 
 .paginationLibrary-list {
+  display: flex;
+  justify-content: center;
+
   &__item {
     display: inline-block;
     padding: 13px;
@@ -24,6 +27,17 @@
     background-color: #ffffff;
     cursor: pointer;
   }
+
+  &__item--arrow {
+      background-position: center;
+      padding: 0;
+      background-color: #f7f7f7;
+  }
+
+  // &__icon {
+  //   width: 100%;
+  //   height: 100%;
+  // }
 
   &__item--active {
     color: #ffffff;
