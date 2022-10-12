@@ -1,4 +1,5 @@
-import svgArrows from "../../images/icons.svg";
+import iconsSVG from "../../images/icons.svg";
+
 export default class PaginationLibrary {
         constructor(btnInPagination) {
                 this.totalElements = 0;
@@ -195,12 +196,11 @@ export default class PaginationLibrary {
                 let isArrowRight = "";
                 const li = document.createElement("li");
                 if (item === "arrow-left") {
-                        const svg = document.createElement("svg");
+                        var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                         svg.setAttribute("width", 16);
                         svg.setAttribute("heigth", 16);
-                        const use = document.createElement("use");
-                        use.setAttribute("href", `${svgArrows}#icon-arrow-left`);
-                        svg.append(use);
+                        svg.setAttributeNS(null, "viewBox", "0 0 32 32");
+                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-left"></use>`
                         txt = svg;
                         // txt = document.createTextNode("<-");
                         item = this.currentPage - 1;
