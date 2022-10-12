@@ -24,8 +24,8 @@
     flex-direction: column;
     gap: 20px;
 
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
+    max-height: calc(100vh - 80px);
+    // overflow-y: auto;
 
     @include mq("tablet") {
         width: 704px;
@@ -70,11 +70,11 @@
         width: 50px;
         height: 50px;
         stroke-width: 0;
-        fill: #fff;
+        fill: #f00;
     }
 
     &__youtube-icon:hover {
-        fill: #f00;
+        fill: #ff7878;
     }
 
     &__poster {
@@ -83,9 +83,13 @@
 
     &__image {
         width: 240px;
+        height: 230px;
+        object-fit: contain;
 
         @include mq("tablet") {
             width: 264px;
+            height: auto;
+            object-fit: cover;
         }
 
         @include mq("desktop") {
@@ -132,12 +136,18 @@
 
     &__article {
         @include fonts(12px, 20px, 500, inherit);
-        padding-bottom: 20px;
+        margin-bottom: 20px;
+        height: 100px;
+        overflow-y: scroll;
+
+        @include mq("tablet") {
+            height: auto;
+        }
     }
 
     &__buttons-wrapper {
         display: flex;
-        gap: 20px;
+        gap: 4px;
         justify-content: center;
     }
 
@@ -153,20 +163,36 @@
         cursor: pointer;
 
         @include mq("tablet") {
-            padding: 15px;
+            padding: 4px 10px;
         }
     }
 
-    &__btn:hover {
-        border: 0;
-        background: #ff6b01;
+    // &__btn:hover {
+    //     background: #ff6b01;
+    //     border: 1px solid #ff6b01;
+    //     color: #ffffff;
+    // }
+
+    &__btn--active {
+        background: #ffc3a7;
         border: 1px solid #ff6b01;
-        color: #ffffff;
+        color: #832626;
     }
 
-    // .watched {
-    // }
-
-    // .in-queue {
-    // }
+    @media (hover: hover) {
+        &__btn:hover {
+            background: #ff6b01;
+            border: 1px solid #ff6b01;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
+    @media (hover: none) {
+        &__btn:active {
+            background: #ff6b01;
+            border: 1px solid #ff6b01;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    }
 }
