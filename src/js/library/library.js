@@ -25,13 +25,13 @@ const genreList = loadFromStorage("genres");
 
 function calculatePerPageBasedOnInnerWidth() {
         if (window.innerWidth > 0 && window.innerWidth < 768) {
-                return (perPage = 4);
+                return 4;
         }
         if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-                return (perPage = 8);
+                return 8;
         }
         if (window.innerWidth >= 1200) {
-                return (perPage = 9);
+                return 9;
         }
 }
 
