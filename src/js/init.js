@@ -9,13 +9,11 @@ function init() {
         console.log('init');
         isHome = document.title === "Kinoteka" ? true : false;
 
-        // console.log(document.title);
         // Init modal window for film details
         initModalFilmDetails();
 
         // Init for Home page
-        if (document.title === "Kinoteka") {
-                console.log(document.title);                
+        if (isHome) {
                 // Init search
                 initHeaderSearchForm();
 
@@ -26,12 +24,9 @@ function init() {
                 getMovieByName_deb({ pagination: true });
                 return;
         } else {
-                console.log(document.title);  
                 // Init library
                 initLibrary();
         }
-
-        document.removeEventListener("DOMContentLoaded", init);
 }
 
 // Wait the DOM is loaded
