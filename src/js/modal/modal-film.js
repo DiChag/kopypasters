@@ -63,7 +63,6 @@ async function openMovieDetailModal(e) {
 
         // Post req by id
         const filmInfo = await getMovieById(id);
-        if (filmInfo === undefined || filmInfo === null) return;
 
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
