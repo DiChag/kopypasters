@@ -1,7 +1,6 @@
-import { fetchMovie, fetchGenres } from "../services/fetch";
+import { fetchMovie } from "../services/fetch";
 import { debounce } from "lodash";
 import { renderMoviesList } from "./moviesList";
-import { saveToStorage } from "../services/storage.js";
 import { loadingSpinnerToggle } from "../interface/spinner";
 import { warningMessage } from "../interface/warning-message";
 import { initPagination } from "../pagination/init";
@@ -39,9 +38,6 @@ async function getMovieByName(param) {
                 // Get total pages and cur page
                 const { total_pages } = dataJSON;
 
-                // Hide loading spinner
-                loadingSpinnerToggle();
-
                 // Return if founded nothing and show warning
                 if (total_pages == 0) {
                         warningMessage(true);
@@ -56,6 +52,9 @@ async function getMovieByName(param) {
                 if (pagination) initPagination({ total_pages, param });
         } catch (error) {
                 console.log(error);
+        } finally {
+                // Hide loading spinner
+                loadingSpinnerToggle();
         }
 }
 
@@ -63,7 +62,6 @@ async function getMovieByName(param) {
 const getMovieByName_deb = debounce((param) => {
         getMovieByName(param);
 }, DEBOUNCE_DELAY);
-
 
 // Fetch movie by ID
 async function getMovieById(id) {
@@ -87,12 +85,12 @@ async function getMovieById(id) {
                 // Get JSON of pictures
                 const dataJSON = response.data;
 
-                // Hide loading spinner
-                loadingSpinnerToggle();
-
                 return dataJSON;
         } catch (error) {
                 console.log(error);
+        } finally {
+                // Hide loading spinner
+                loadingSpinnerToggle();
         }
 }
 
