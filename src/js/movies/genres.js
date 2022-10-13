@@ -23,7 +23,7 @@ function parseGenres(genres) {
 async function getGenres() {
         try {
                 // Send http req, trying get the pictures
-                const response = await fetchGenres();
+                const response = await fetchGenres();                
 
                 if (response.status !== 200) {
                         throw new Error(response.status);
