@@ -1,5 +1,3 @@
-import { loadingSpinnerToggle } from "../interface/spinner";
-import { fetchMovieDetailsById } from "../services/fetch";
 import { scrollableBody } from "../helpers";
 import { appendToStorage, removeKeyFromStorage, saveToStorage } from "../services/storage";
 import {
@@ -13,12 +11,16 @@ import { deattachTrailer, initTrailer } from "./trailer";
 // Blank image
 import blankImage from "../../images/no-image.svg";
 import { isHome } from "../init";
+import { getMovieById } from "../movies/movies";
+import { parseGenres } from "../movies/genres";
 
 // Items in local storage
 const WATCHED_STORE = "watchedFilms";
 const QUEUED_STORE = "queuedFilms";
 
+// Film id
 let id;
+
 // Obj for save to store
 let filmInfoParsed;
 
@@ -45,11 +47,6 @@ export default function initModalFilmDetails() {
         refs.grid.addEventListener("click", openMovieDetailModal);
 }
 
-// Join genres array to string
-export function parseGenres(genres) {
-        return genres.map((genre) => genre.name).join(", ");
-}
-
 async function openMovieDetailModal(e) {
         const filmCard = e.target;
 
@@ -66,7 +63,8 @@ async function openMovieDetailModal(e) {
 
         // Post req by id
         const filmInfo = await getMovieById(id);
-
+        if (filmInfo === undefined || filmInfo === null) return;
+        
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
 
@@ -77,6 +75,24 @@ async function openMovieDetailModal(e) {
         // Hide scroll on body
         scrollableBody(false);
 
+        // Render film info in modal
+        renderMovieDetails(filmInfo);
+
+        // Init trailer of film
+        const {
+                videos: { results: trailersList },
+        } = filmInfo;
+        initTrailer(trailersList);
+
+        // Check statuses
+        setButtonStatus("all", checkLibrary(id));
+
+        // Attach click events on buttons
+        refs.watchBtn.addEventListener("click", handleChangeStatus);
+        refs.queueBtn.addEventListener("click", handleChangeStatus);
+}
+
+function renderMovieDetails(filmInfo) {
         // Export data
         const {
                 title = "NO TITLE",
@@ -88,7 +104,6 @@ async function openMovieDetailModal(e) {
                 vote_count,
                 poster_path,
                 genres,
-                videos: { results: trailersList },
         } = filmInfo;
 
         // Save temp object
@@ -103,11 +118,7 @@ async function openMovieDetailModal(e) {
                 vote_average,
                 vote_count,
                 poster_path,
-                videos: { results: trailersList },
         };
-
-        // Init trailer of film
-        initTrailer(trailersList);
 
         // Parse names of genres
         const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
@@ -140,13 +151,6 @@ async function openMovieDetailModal(e) {
 
         // Avg votes
         refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
-
-        // Check statuses
-        setButtonStatus("all", checkLibrary(id));
-
-        // Attach click events on buttons
-        refs.watchBtn.addEventListener("click", handleChangeStatus);
-        refs.queueBtn.addEventListener("click", handleChangeStatus);
 }
 
 // On click buttons events
@@ -301,36 +305,5 @@ function closeModal(e) {
                 } else {
                         showQueuedFilms();
                 }
-        }
-}
-
-// Fetch movie by ID
-async function getMovieById(id) {
-        try {
-                // spinner
-                loadingSpinnerToggle();
-                await new Promise((resolve) => setTimeout(resolve, 300));
-
-                // Send http req, trying get the pictures
-                const response = await fetchMovieDetailsById(id);
-
-                // Check statuses
-                if (response.status !== 200) {
-                        throw new Error(response.status);
-                }
-
-                if (response.data === undefined) {
-                        throw new Error("Incorrect data");
-                }
-
-                // Get JSON of pictures
-                const dataJSON = response.data;
-
-                // Hide loading spinner
-                loadingSpinnerToggle();
-
-                return dataJSON;
-        } catch (error) {
-                console.log(error);
         }
 }

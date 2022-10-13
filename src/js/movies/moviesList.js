@@ -1,30 +1,30 @@
 import { getRndInteger } from "../helpers/index.js";
-import { loadFromStorage } from "../services/storage.js";
 import { createMovieCard } from "./movieCard";
 import { nextPage } from "../pagination/util";
 import { nextCard } from "./nextCard";
 
 // Clear gallery
-function clearGallery() {
-        const gallery = document.querySelector(".movies-section__grid");
+function clearGallery(gallery) {
         gallery.innerHTML = "";
 }
 
 // Rendering founded pictures to grid
-function renderMoviesList(dataJSON) {
+export function renderMoviesList(dataJSON) {
+
         // Element to render cards
         const gallery = document.querySelector(".movies-section__grid");
 
+        // Clear all gallery
+        clearGallery(gallery);
+
         // All data from server
         const { results: moviesList } = dataJSON;
-
-        const genreList = loadFromStorage("genres");
 
         // Remap json to HTML elements
         const moviesCards = moviesList
                 .map((movie) => {
                         // Return html
-                        return createMovieCard(movie, genreList);
+                        return createMovieCard(movie);
                 })
                 .join("");
 
@@ -67,13 +67,4 @@ export function attachOnloadToCards(cards) {
                         }, getRndInteger(200, 500));
                 };
         });
-}
-
-// Initialization render gallery
-export function initRender(dataJSON) {
-        // Clear all gallery
-        clearGallery();
-
-        // Rendering part of gallery
-        renderMoviesList(dataJSON);
 }
