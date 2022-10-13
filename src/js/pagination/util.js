@@ -1,15 +1,24 @@
+import { arrowIcon } from "../interface/arrow-icon";
 import { myPager } from "./init";
 
 // useful functions
 export function createLi(item) {
         const _li = document.createElement("li");
         const _txt = document.createTextNode(item.value);
-        _li.appendChild(_txt);
+        if (item.title === "Pre page") {
+                _li.append(arrowIcon("left"));
+        } else if (item.title === "Next page") {
+                _li.append(arrowIcon("right"));
+        } else _li.appendChild(_txt);
+
         item.liClass && _li.classList.add(item.liClass);
+
         item.title && _li.setAttribute("title", item.title);
+
         _li.addEventListener("click", function () {
                 item.action(item.value);
         });
+
         return _li;
 }
 

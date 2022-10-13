@@ -203,7 +203,7 @@ export default class PaginationLibrary {
                 if (item === "arrow-left") {
                         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                         svg.setAttribute("width", 16);
-                        svg.setAttribute("heigth", 16);
+                        svg.setAttribute("height", 16);
                         svg.setAttributeNS(null, "viewBox", "0 0 32 32");
                         item = this.currentPage - 1;
                         svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-left" data-page="${item}"></use>`;
@@ -215,7 +215,7 @@ export default class PaginationLibrary {
                 } else if (item === "arrow-right") {
                         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                         svg.setAttribute("width", 16);
-                        svg.setAttribute("heigth", 16);
+                        svg.setAttribute("height", 16);
                         svg.setAttributeNS(null, "viewBox", "0 0 32 32");
                         item = this.currentPage + 1;
                         svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-right" data-page="${item}"></use>`;

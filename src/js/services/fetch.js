@@ -74,5 +74,6 @@ export const fetchMovieDetailsById = async (id) => {
 
         const urlId = `movie/${id}`;
         
+        // console.log(`${url}${urlId}?${param.toString()}`);
         return axios.get(`${url}${urlId}?${param.toString()}`);
 };

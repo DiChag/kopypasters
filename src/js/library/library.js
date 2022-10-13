@@ -1,7 +1,6 @@
 import { createMovieCard } from "../movies/movieCard";
 import { attachOnloadToCards } from "../movies/moviesList";
 import PaginationLibrary from "../paginationLibrary/paginationLibrary";
-import { loadFromStorage } from "../services/storage";
 
 const instPagination = new PaginationLibrary(9);
 instPagination.paginationContainer = "paginationLibrary";
