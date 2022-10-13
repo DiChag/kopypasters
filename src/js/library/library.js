@@ -39,7 +39,7 @@ function handleShowWatchedFilms() {
         showWatchedFilms();
 }
 
-// WATCHED
+// Watched
 function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
         refs.watchedBtn.classList.add("library-btn--active");
@@ -66,8 +66,7 @@ export function getWatchedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("watchedFilms");
                 if (!savedFilms && !savedFilms.length) {
-                        // console.log("there is nothing with such a key!!! and it is empty");
-                        throw new Error("There is no data in local storage.");
+                        throw new Error("There is no data.");
                 }
                 const parsedFilmsData = JSON.parse(savedFilms);
                 return parsedFilmsData;
@@ -123,8 +122,8 @@ export function getQueuedFromLocalStorage() {
                 const parsedFilmsData = JSON.parse(savedFilms);
 
                 return parsedFilmsData;
-        } catch (e) {
-                console.log(e);
+        } catch (error) {
+                console.log(error);
         }
 }
 
