@@ -39,7 +39,7 @@ function handleShowWatchedFilms() {
         showWatchedFilms();
 }
 
-// WATCHED
+// Watched
 function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
         refs.watchedBtn.classList.add("library-btn--active");
@@ -57,6 +57,7 @@ function showWatchedFilms() {
                 // Add events to cards
                 attachOnloadToCards(cards);
         } catch (error) {
+                displayMessage();
                 console.log(error);
         }
 }
@@ -65,8 +66,7 @@ export function getWatchedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("watchedFilms");
                 if (!savedFilms && !savedFilms.length) {
-                        console.log("there is nothing with such a key!!! and it is empty");
-                        throw new Error("There is no data in local storage.");
+                        throw new Error("There is no data.");
                 }
                 const parsedFilmsData = JSON.parse(savedFilms);
                 return parsedFilmsData;
@@ -96,7 +96,7 @@ function handleShowQueuedFilms() {
         showQueuedFilms();
 }
 
-// QUEUED
+// Queued
 function showQueuedFilms() {
         refs.queueBtn.classList.add("library-btn--active");
         refs.watchedBtn.classList.remove("library-btn--active");
@@ -107,8 +107,9 @@ function showQueuedFilms() {
                 instPagination.initPagination(queuedFilms.length, perPage, showQueuedFilms);
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
-        } catch (e) {
+        } catch (error) {
                 displayMessage();
+                console.log(error);
         }
 }
 
@@ -116,14 +117,13 @@ export function getQueuedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("queuedFilms");
                 if (!savedFilms && !savedFilms.length) {
-                        console.log("there is nothing with such a key!!! and it is empty");
                         throw new Error("There is no data in local storage.");
                 }
                 const parsedFilmsData = JSON.parse(savedFilms);
 
                 return parsedFilmsData;
-        } catch (e) {
-                console.log(e);
+        } catch (error) {
+                console.log(error);
         }
 }
 
@@ -144,13 +144,14 @@ function renderQueuedFilms(queuedFilms) {
         return markup;
 }
 
-//to display message when there are no films in WATCHED/ QUEUE:
+//to display the message when there are no films in WATCHED/QUEUE:
 
 function displayMessage() {
         const messageMarkup = `<p class="movies-section__message"> Oops, seems like it's empty. Go to <a href="./index.html" class="movies-section__message--bold">Home</a> to add some films.</p>`;
         refs.gallery.insertAdjacentHTML("beforeend", messageMarkup);
 }
 
+// clearing gallery
 function clearGallery() {
         refs.gallery.innerHTML = "";
 }
