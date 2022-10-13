@@ -1,10 +1,13 @@
 import { fetchMovie, fetchGenres } from "../services/fetch";
 import { debounce } from "lodash";
-import { initRender } from "./moviesList";
+import { renderMoviesList } from "./moviesList";
 import { saveToStorage } from "../services/storage.js";
 import { loadingSpinnerToggle } from "../interface/spinner";
 import { warningMessage } from "../interface/warning-message";
 import { initPagination } from "../pagination/init";
+import { loadingSpinnerToggle } from "../interface/spinner";
+import { fetchMovieDetailsById } from "../services/fetch";
+import initHeaderSearchForm from "../header/header";
 
 export const DEBOUNCE_DELAY = 300;
 
@@ -45,8 +48,8 @@ async function getMovieByName(param) {
                         return;
                 }
 
-                // Initialization rendering gallery
-                initRender(dataJSON);
+                // Rendering founded pictures to grid
+                renderMoviesList(dataJSON);
 
                 // Initialization pagination
                 const { pagination } = param;
@@ -61,12 +64,18 @@ const getMovieByName_deb = debounce((param) => {
         getMovieByName(param);
 }, DEBOUNCE_DELAY);
 
-// Post http req and trying to get pictures
-async function getGenres() {
-        try {
-                // Send http req, trying get the pictures
-                const response = await fetchGenres();
 
+// Fetch movie by ID
+async function getMovieById(id) {
+        try {
+                // spinner
+                loadingSpinnerToggle();
+                await new Promise((resolve) => setTimeout(resolve, 300));
+
+                // Send http req, trying get the pictures
+                const response = await fetchMovieDetailsById(id);
+
+                // Check statuses
                 if (response.status !== 200) {
                         throw new Error(response.status);
                 }
@@ -78,11 +87,21 @@ async function getGenres() {
                 // Get JSON of pictures
                 const dataJSON = response.data;
 
-                // Save genres to localStorage
-                saveToStorage("genres", dataJSON);
+                // Hide loading spinner
+                loadingSpinnerToggle();
+
+                return dataJSON;
         } catch (error) {
                 console.log(error);
         }
 }
 
-export { getMovieByName_deb, getGenres };
+function initHome() {
+        // Init search
+        initHeaderSearchForm();
+
+        // Fetching popular movies( empty keyword )
+        getMovieByName_deb({ pagination: true });
+}
+
+export { getMovieByName_deb, getMovieById, initHome };

@@ -20,8 +20,6 @@ const refs = {
         gallery: document.querySelector(".movies-section__grid"),
 };
 
-const genreList = loadFromStorage("genres");
-
 function calculatePerPageBasedOnInnerWidth() {
         if (window.innerWidth > 0 && window.innerWidth < 768) {
                 return 4;
@@ -85,7 +83,7 @@ function renderWatchedFilms(watchedFilms) {
                 i <= instPagination.lastIndexOfArray;
                 i += 1
         ) {
-                markup = markup + createMovieCard(watchedFilms[i], genreList);
+                markup = markup + createMovieCard(watchedFilms[i]);
         }
 
         return markup;
@@ -137,7 +135,7 @@ function renderQueuedFilms(queuedFilms) {
                 i <= instPagination.lastIndexOfArray;
                 i += 1
         ) {
-                markup = markup + createMovieCard(queuedFilms[i], genreList);
+                markup = markup + createMovieCard(queuedFilms[i]);
                 // debugger;
         }
 
