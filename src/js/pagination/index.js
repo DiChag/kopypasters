@@ -150,26 +150,26 @@ function createPreNext (pageCount, pager, mode) {
  * render pagination
  * @param  {Object} pager - the object instantiated by Pagination
  */
-function build (pager) {
+function build (pager) {  
   pager.lists = []
   const pageCount = Math.ceil(pager.total / pager.size)
   // fullpageCount contains start, finish, and adjacents of current page
-  const fullPageCount = _config.adjacent * 2 + 3
+  const fullPageCount = pager.adjacent * 2 + 3
   validateCurrent(pageCount, pager)
   pager.lists = pager.lists.concat(createPreNext(pageCount, pager, 'pre'))
   // If the page count is less than the fullPageCount
   // Just display all pages
   if (pageCount <= fullPageCount) {
     pager.lists = pager.lists.concat(createRange(1, pageCount, pager))
-  } else if (pager.current - _config.adjacent <= 2) {
+  } else if (pager.current - pager.adjacent <= 2) {
     pager.lists = pager.lists.concat(createRange(1, fullPageCount, pager))
     pager.lists = pager.lists.concat(createLast(pageCount, pager))
-  } else if (pager.current < pageCount - (_config.adjacent + 2)) {
-    let start = pager.current - _config.adjacent
-    let finish = pager.current + _config.adjacent
+  } else if (pager.current < pageCount - (pager.adjacent + 2)) {
+    let start = pager.current - pager.adjacent
+    let finish = pager.current + pager.adjacent
     pager.lists = pager.lists.concat(createFirst(pageCount, pager))
     pager.lists = pager.lists.concat(createRange(start, finish, pager))
-    pager.lists = pager.lists.concat(createLast(pageCount, pager))
+    pager.lists = pager.lists.concat(createLast(pageCount, pager))    
   } else {
     let start = pageCount - fullPageCount + 1
     let finish = pageCount
@@ -177,6 +177,7 @@ function build (pager) {
     pager.lists = pager.lists.concat(createRange(start, finish, pager))
   }
   pager.lists = pager.lists.concat(createPreNext(pageCount, pager, 'next'))
+  
   const lists = createLists(pager.lists, _config)
   replaceElement(lists, pager.field)
   pager.field = lists
@@ -187,14 +188,14 @@ function build (pager) {
 
 const _config = {
   ulClass: 'pagination',
-  dots: '...',
+  dots: '..',
   activeClass: 'active',
   disableClass: 'disabled',
   hideIfEmpty: true,
   showPreNext: true,
   scrollTop: false,
   scrollContainer: 'body',
-  adjacent: 2,
+  // adjacent: 0,
   lang: 'en'
 }
 
@@ -206,6 +207,7 @@ class Pagination {
     this.field = document.querySelector(field)
     this.lists = []
     this.current = 1
+    this.adjacent = 3;
     build(this)
   }
 
@@ -216,6 +218,11 @@ class Pagination {
       }
       _config[key] = config[key]
     })
+  }
+
+  update({adjacent}){
+    this.adjacent = adjacent;
+    build(this);
   }
 
   goToPage (num) {
