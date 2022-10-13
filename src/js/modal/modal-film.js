@@ -64,7 +64,7 @@ async function openMovieDetailModal(e) {
         // Post req by id
         const filmInfo = await getMovieById(id);
         if (filmInfo === undefined || filmInfo === null) return;
-        
+
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
 
@@ -121,10 +121,10 @@ function renderMovieDetails(filmInfo) {
         };
 
         // Parse names of genres
-        const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
+        const genresStr = genres && genres.length > 0 ? parseGenres(genres) : "No genres";
 
         // Title
-        refs.title.innerText = title;
+        refs.title.innerText = title || "No title";
 
         // Poster image
         poster_path
@@ -135,7 +135,7 @@ function renderMovieDetails(filmInfo) {
                 : refs.posterImage.setAttribute("src", blankImage);
 
         // Original title
-        refs.orgTitle.innerText = original_title || "NO TITLE";
+        refs.orgTitle.innerText = original_title || "No title";
 
         // Popularity
         refs.popularity.innerText = popularity ? popularity.toFixed(2) : "No info";

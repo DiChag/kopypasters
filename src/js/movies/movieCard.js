@@ -26,6 +26,7 @@ function preparingImage(poster_path) {
 
 // Preparing title
 function preparingTitle(title) {
+        if (!title) return;
         return title.length > 23 ? `${title.slice(0, 23)}...` : title;
 }
 
