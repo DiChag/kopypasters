@@ -13,10 +13,10 @@ function init() {
 
         // Fetching genres and save to localstore
         getGenres();
-        
+
         if (isHome) {
                 // Init home page
-                initHome();                
+                initHome();
         } else {
                 // Init library
                 initLibrary();
