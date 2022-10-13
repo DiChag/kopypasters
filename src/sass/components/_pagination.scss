@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
+    align-items: center;
     color: #000;
 
     & > li {
@@ -23,6 +24,12 @@
 
     & > li.disabled {
         cursor: not-allowed;
+    }
+
+    & > li:first-child,
+    & > li:last-child {
+        position: relative;
+        line-height: 0;
     }
 
     // TABLET
