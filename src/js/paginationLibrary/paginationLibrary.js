@@ -1,4 +1,5 @@
 import iconsSVG from "../../images/icons.svg";
+import { arrowIcon } from "../interface/arrow-icon";
 
 export default class PaginationLibrary {
         constructor(btnInPagination) {
@@ -201,24 +202,16 @@ export default class PaginationLibrary {
                 let isArrowRight = "";
                 const li = document.createElement("li");
                 if (item === "arrow-left") {
-                        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                        svg.setAttribute("width", 16);
-                        svg.setAttribute("height", 16);
-                        svg.setAttributeNS(null, "viewBox", "0 0 32 32");
                         item = this.currentPage - 1;
-                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-left" data-page="${item}"></use>`;
+                        const svg = arrowIcon("left", 16, 16);
                         svg.classList.add("paginationLibrary-list__icon");
                         txt = svg;
                         // txt = document.createTextNode("<-");
                         svg.dataset.page = item;
                         isArrowLeft = true;
                 } else if (item === "arrow-right") {
-                        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                        svg.setAttribute("width", 16);
-                        svg.setAttribute("height", 16);
-                        svg.setAttributeNS(null, "viewBox", "0 0 32 32");
                         item = this.currentPage + 1;
-                        svg.innerHTML = `<use href="${iconsSVG}#icon-arrow-right" data-page="${item}"></use>`;
+                        const svg = arrowIcon("right", 16, 16);
                         svg.classList.add("paginationLibrary-list__icon");
                         txt = svg;
                         // txt = document.createTextNode("->");
