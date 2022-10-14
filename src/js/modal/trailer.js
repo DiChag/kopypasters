@@ -5,14 +5,13 @@ let trailer;
 const refs = {
         openTrailerBtn: document.querySelector(".modal-detail__trailer-btn"),
         backdropTrailer: document.querySelector(".backdrop_trailer"),
-        youtubeLink: document.querySelector(".modal-detail__youtube-link"),
-        youtubeIconOnPosetr: document.querySelector(".modal-detail__youtube-link"),
+        youtubeIconOnPoster: document.querySelector(".modal-detail__youtube-link"),
 };
 
 export function initTrailer(trailersList) {
         // Film trailer
         trailer = parseTrailers(trailersList);
-        trailer && refs.youtubeLink.setAttribute("href", trailer);
+        trailer && refs.youtubeIconOnPoster.setAttribute("href", trailer);
 
         // YouTube link for video trailer
         refs.backdropTrailer.firstElementChild.src = trailer;
@@ -47,7 +46,7 @@ function parseTrailers(trailersList) {
         let videoByOfficialTrailer, videoByTrailer, otherVideo;
         // Default button is disabled
         refs.openTrailerBtn.setAttribute("disabled", true);
-        refs.youtubeIconOnPosetr.style.display = "none";
+        refs.youtubeIconOnPoster.style.display = "none";
 
         if (trailersList.length === 0) {
                 return;
@@ -67,7 +66,7 @@ function parseTrailers(trailersList) {
 
             if (videoByOfficialTrailer || videoByTrailer || otherVideo) {
         refs.openTrailerBtn.removeAttribute("disabled");
-        refs.youtubeIconOnPosetr.style.display = "block";
+        refs.youtubeIconOnPoster.style.display = "block";
             return  `${YOUTUBE_URL}${videoByOfficialTrailer || videoByTrailer || otherVideo}`
         }          
 }
