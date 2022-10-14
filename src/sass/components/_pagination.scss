@@ -6,11 +6,11 @@
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    color: #000;
+    color: $pag-color;
 
     & > li {
         cursor: pointer;
-        border: 1px solid #eee;
+        border: 1px solid $pag-color-border;
         border-radius: 3px;
         margin-right: 2px;
         padding: 4px 7px;
@@ -18,8 +18,8 @@
     }
 
     & > li:hover {
-        background-color: #ff6b01;
-        color: #fff;
+        background-color: $pag-hover-bg;
+        color: $pag-hover-color;
     }
 
     & > li.disabled {
@@ -45,7 +45,7 @@
     }
 
     .active {
-        color: #fff;
-        background-color: #ff6b01;
+        color: $pag-hover-color;
+        background-color: $pag-hover-bg;
     }
 }

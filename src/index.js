@@ -1,9 +1,5 @@
 // Services
-import "./js/services/fetch";
-
-// Pagination
-import "./js/pagination";
-import "./js/paginationLibrary";
+// import "./js/services/fetch";
 
 // All modals
 import "./js/modal";

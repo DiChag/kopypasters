@@ -37,6 +37,8 @@ export const fetchMovie = async ({ keyword, page }) => {
                 url = `${url}search/movie`;
         } else {
                 url = `${url}movie/popular`;
+                // For this link a lot of movies doesn't detail info
+                // url = `${url}trending/all/week`;
         }
 
         // Page param

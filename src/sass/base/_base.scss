@@ -1,7 +1,7 @@
 body {
     min-width: 320px;
-    font-family: 'Roboto', sans-serif;
-    background-color: #fff;
-    color: #000;
+    font-family: $font-family;
+    background-color: $bg-color;
+    color: $font-color;
     @include fonts(14px, 16.41px, 400);
 }
