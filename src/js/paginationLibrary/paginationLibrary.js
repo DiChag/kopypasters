@@ -1,4 +1,3 @@
-import iconsSVG from "../../images/icons.svg";
 import { arrowIcon } from "../interface/arrow-icon";
 
 export default class PaginationLibrary {
