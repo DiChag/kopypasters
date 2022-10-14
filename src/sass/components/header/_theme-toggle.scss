@@ -1,6 +1,28 @@
 .theme-toggle__wrapper {
     margin-left: 20px;
     margin-right: auto;
+    position: relative;
+}
+// Slider
+.theme-toggle__thumb {
+    position: absolute;
+    top: 1px;
+    left: 25px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #ae191b;
+    box-sizing: border-box;
+    transition: all 0.6s $timing-function 0ms;
+    transform: translateX(0);
+    box-shadow: $sun-shadow;
+
+    &--after {
+        position: absolute;
+        top: 1px;
+        left: 2px;
+        box-shadow: $moon-shadow;
+    }
 }
 
 .theme-toggle__btn {
@@ -11,6 +33,7 @@
     border: none;
     width: 50px;
     height: 24px;
+    padding: 0px 5px;
 
     display: flex;
     justify-content: center;
@@ -19,11 +42,13 @@
 }
 
 .theme-toggle__icon-sun {
-    display: none;
+    display: block;
+    margin-left: auto;
 }
 
 .theme-toggle__icon-moon {
     display: block;
+    margin-right: auto;
 }
 
 body.dark-theme {
@@ -36,7 +61,7 @@ body.dark-theme {
     }
 
     & .theme-toggle__icon-moon {
-        display: none;
+        display: block;
     }
 
     // Головна сторінка
@@ -67,7 +92,6 @@ body.dark-theme {
     & .footer__text,
     & .footer__link {
         color: $dark-footer-color;
-
     }
 
     // Модальне вікно футера
