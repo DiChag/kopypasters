@@ -1,5 +1,5 @@
 .movies-section {
-    min-height: calc(100vh - 332px);
+    min-height: calc(100vh - 278px);
 
     &__container {
         padding: 20px;
@@ -145,7 +145,7 @@
 
     // TABLET
     @include mq("tablet") {
-        min-height: calc(100vh - 301px);
+        min-height: calc(100vh - 264px);
 
         &__container {
             padding: 60px 32px;
