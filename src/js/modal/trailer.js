@@ -21,25 +21,32 @@ export function initTrailer(trailersList) {
         refs.backdropTrailer.addEventListener("click", closeTrailerWindow);
 }
 
+// Check trailer window status
+export function checkStatusTrailer() {
+        return !refs.backdropTrailer.classList.contains("unshown");
+}
+
 export function deattachTrailer() {
-        // Deattach events        
+        // Deattach events
         refs.openTrailerBtn.removeEventListener("click", openVideoTrailer);
         refs.backdropTrailer.removeEventListener("click", closeTrailerWindow);
 }
 
-// function that opens videoTrailer
-function openVideoTrailer() {        
-        refs.backdropTrailer.classList.remove("unshown");
-        refs.backdropTrailer.firstElementChild.src = trailer;
+// function that opens and close video trailer
+export function openVideoTrailer(bool) {
+        if (bool) {
+                refs.backdropTrailer.classList.remove("unshown");
+                refs.backdropTrailer.firstElementChild.src = trailer;
+        } else {
+                refs.backdropTrailer.classList.add("unshown");                
+        }
 }
 
 // function that closes videoTrailer
-function closeTrailerWindow() {        
+function closeTrailerWindow() {
         refs.backdropTrailer.classList.add("unshown");
         refs.backdropTrailer.firstElementChild.src = "";
 }
-
-
 
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
@@ -54,19 +61,20 @@ function parseTrailers(trailersList) {
 
         for (const video of trailersList) {
                 if (video.name.includes("Official Trailer")) {
-                        videoByOfficialTrailer = video.key }
+                        videoByOfficialTrailer = video.key;
+                }
 
-                 if (video.name.includes("Trailer")) {
+                if (video.name.includes("Trailer")) {
                         videoByTrailer = video.key;
-                 }
-                 if (video.name) {
+                }
+                if (video.name) {
                         otherVideo = video.key;
-                }      
+                }
         }
 
-            if (videoByOfficialTrailer || videoByTrailer || otherVideo) {
-        refs.openTrailerBtn.removeAttribute("disabled");
-        refs.youtubeIconOnPoster.style.display = "block";
-            return  `${YOUTUBE_URL}${videoByOfficialTrailer || videoByTrailer || otherVideo}`
-        }          
+        if (videoByOfficialTrailer || videoByTrailer || otherVideo) {
+                refs.openTrailerBtn.removeAttribute("disabled");
+                refs.youtubeIconOnPoster.style.display = "block";
+                return `${YOUTUBE_URL}${videoByOfficialTrailer || videoByTrailer || otherVideo}`;
+        }
 }
