@@ -50,6 +50,7 @@ async function getMovieByName(param) {
                 // Initialization pagination
                 const { pagination } = param;
                 if (pagination) initPagination({ total_pages, param });
+                
         } catch (error) {
                 console.log(error);
         } finally {
