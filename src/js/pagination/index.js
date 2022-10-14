@@ -154,7 +154,7 @@ function build (pager) {
   pager.lists = []
   const pageCount = Math.ceil(pager.total / pager.size)
   // fullpageCount contains start, finish, and adjacents of current page
-  const fullPageCount = pager.adjacent * 2 + 3
+  const fullPageCount = pager.adjacent * 2 + 2
   validateCurrent(pageCount, pager)
   pager.lists = pager.lists.concat(createPreNext(pageCount, pager, 'pre'))
   // If the page count is less than the fullPageCount
@@ -193,7 +193,7 @@ const _config = {
   disableClass: 'disabled',
   hideIfEmpty: true,
   showPreNext: true,
-  scrollTop: false,
+  scrollTop: true,
   scrollContainer: 'body',
   // adjacent: 0,
   lang: 'en'
