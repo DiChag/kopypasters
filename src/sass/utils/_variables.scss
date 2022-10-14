@@ -1,6 +1,69 @@
-:root {
-    --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    --animation-duration: 250ms;
+$timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+$animation-duration: 250ms;
 
-    // ТРЕБА ДОДАТИ ГЛОБАЛЬНИХ ЗМІННИХ
-}
+// Theme black
+$dark-bg-color: #272e34;
+$dark-border-top-color: #ae191b;
+$dark-movies-image-shadow: rgba(204, 204, 204, 0.25) 2px 2px 25px 2px;
+$dark-movies-title-color: #fff;
+$dark-next-card-title-color: #fff;
+$dark-pagination-color: #ff6b01c2;
+$dark-footer-color: #fff;
+$dark-footer-bg-color: #272e34;
+$dark-footer-modal-title-color: #272e34;
+$dark-footer-modal-bg-color: #3d3a2c;
+$dark-modal-detail-bg-color: #272e34;
+$dark-modal-detail-title-color: #fff;
+$dark-modal-detail-col-color: #fff;
+$dark-modal-detail-about-label-color: #fff;
+$dark-modal-detail-article-color: #fff;
+$dark-movies-message-color: #fff;
+
+// Body
+$bg-color: #fff;
+
+// Font
+$main-font-size: 12px;
+$main-font-weight: 500;
+$font-family: "Roboto", sans-serif;
+$font-color: #000;
+
+// Navigation
+$nav-bottom-border-color: #ff001b;
+
+// Search
+$search-bottom-border-color: #fff;
+$search-placeholder-color: #fff;
+
+// Warning message
+$warning-message-color: #ff001b;
+
+// Modal film detail
+$modal-detail-bg-color: #fff;
+$modal-detail-title-color: #fff;
+$modal-detail-col-color: #8c8c8c;
+$modal-detail-about-label-color: #fff;
+$modal-detail-article-color: #fff;
+$movies-message-color: #fff;
+$modal-detail-voteavg-bg: #ff6b08;
+$modal-detail-voteavg-color: #fff;
+$modal-detail-btn-bg: #fff;
+$modal-detail-btn-border: #000;
+$modal-detail-btn-color: #000;
+$modal-detail-btn-active-bg: #ffc3a7;
+$modal-detail-btn-hover-bg: #ff6b01;
+$modal-detail-btn-hover-color: #fff;
+
+// Next card
+$next-card-color: rgb(78, 133, 133);
+$next-card-bg: #f7f7f7;
+$next-card-hover: rgb(255, 107, 8);
+
+// Pagination index
+$pag-color: #000;
+$pag-color-border: #eee;
+$pag-hover-bg: #ff6b01;
+$pag-hover-color: #fff;
+
+// :root {
+// }

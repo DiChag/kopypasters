@@ -28,7 +28,7 @@
 
 body.dark-theme {
     // Головний колір body
-    background-color: #272e34;
+    background-color: $dark-bg-color;
 
     // Стилізація кнопки
     & .theme-toggle__icon-sun {
@@ -41,67 +41,67 @@ body.dark-theme {
 
     // Головна сторінка
     & .movies-section {
-        border-top: 1px solid #ae191b;
+        border-top: 1px solid $dark-border-top-color;
     }
 
     & .movies-section__image {
-        box-shadow: rgba(204, 204, 204, 0.25) 2px 2px 25px 2px;
+        box-shadow: $dark-movies-image-shadow;
     }
 
     & .movies-section__title {
-        color: #fff;
+        color: $dark-movies-title-color;
     }
 
     & .next-card__title {
-        color: #fff;
+        color: $dark-next-card-title-color;
     }
 
     & .pagination li {
-        background-color: #ff6b01c2;
+        background-color: $dark-pagination-color;
     }
 
     & .footer {
-        background-color: #272e34;
+        background-color: $dark-footer-bg-color;
     }
 
     & .footer__text,
     & .footer__link {
-        color: #fff;
+        color: $dark-footer-color;
 
     }
 
     // Модальне вікно футера
     & .footer-modal__title {
-        color: #272e34;
+        color: $dark-footer-modal-title-color;
     }
 
     & .footer-modal__bg {
-        background-color: #3d3a2c;
+        background-color: $dark-footer-modal-bg-color;
     }
 
     // Модальне вікно картки
     & .modal-detail {
-        background-color: #272e34;
+        background-color: $dark-modal-detail-bg-color;
     }
 
     & .modal-detail__title {
-        color: #fff;
+        color: $dark-modal-detail-title-color;
     }
 
     & .modal-detail__col1,
     & .modal-detail__col2 {
-        color: #fff;
+        color: $dark-modal-detail-col-color;
     }
 
     & .modal-detail__about-label {
-        color: #fff;
+        color: $dark-modal-detail-about-label-color;
     }
 
     & .modal-detail__article {
-        color: #fff;
+        color: $dark-modal-detail-article-color;
     }
 
     & .movies-section__message {
-        color: #fff;
+        color: $dark-movies-message-color;
     }
 }
