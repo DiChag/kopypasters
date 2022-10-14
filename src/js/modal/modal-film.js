@@ -40,6 +40,8 @@ const refs = {
 
         watchBtn: document.getElementById("watch-btn"),
         queueBtn: document.getElementById("queue-btn"),
+        // new=========================================================================================
+        backdropTrailer: document.querySelector(".backdrop_trailer"),
 };
 
 // Init attaching
@@ -72,6 +74,7 @@ async function openMovieDetailModal(e) {
         refs.modalDetailOverlay.addEventListener("click", closeModal);
         document.addEventListener("keydown", closeModal);
 
+        
         // Hide scroll on body
         scrollableBody(false);
 
@@ -259,6 +262,8 @@ function checkLibrary(id) {
         };
 }
 
+
+
 // Close modal
 function closeModal(e) {
         // Keyboard event
@@ -279,6 +284,8 @@ function closeModal(e) {
                 // Not close buttons
                 if (e.target.classList.contains("modal-detail__btn")) return;
         }
+
+           
 
         // Toggle hidden class
         refs.modalDetailOverlay.classList.toggle("is-hidden");
@@ -307,3 +314,72 @@ function closeModal(e) {
                 }
         }
 }
+
+
+
+
+
+// // Close modal
+// function closeModal(e) {
+//         // Keyboard event====================================================================================
+//         if (e.type === "keydown") {
+//                 // Not escape
+//                 if (e.keyCode === 27 && refs.backdropTrailer.classList.contains("unshown") ) {
+//                        refs.modalDetailOverlay.classList.add("is-hidden");
+//                 }
+//                 else if (e.keyCode === 27 && !refs.backdropTrailer.classList.contains("unshown") &&
+//                 !refs.modalDetailOverlay.classList.contains("is-hidden")) {
+//                         refs.backdropTrailer.classList.add("unshown");
+//                 }
+                
+//                 else if (e.keyCode === 27 && refs.backdropTrailer.classList.contains("unshown") &&
+//                         !refs.modalDetailOverlay.classList.contains("is-hidden")) {
+//                         refs.modalDetailOverlay.classList.add("is-hidden")
+//                 }
+//         }
+//         // ====================================================================================================
+
+
+//         // // Mouse event
+//         else {
+//                 // Closest parent is "button" and class is "backdrop"
+//                 // =======================================================================================
+//                 if (!e.target.closest("button") && e.target.classList.contains("backdrop")) {
+//                         console.log(e.target);
+//                 //========================================================================================
+//                                 refs.modalDetailOverlay.classList.toggle("is-hidden");
+
+//                 }
+
+//                 // Not close buttons
+//                 if (e.target.classList.contains("modal-detail__btn")) return;
+//         }
+
+//         // Show scroll on body
+//         scrollableBody(true);
+
+        
+//         // For library
+//         if (!isHome) {
+//                 const watchedButtonEl = document.querySelector("[data-action='watched']");
+//                 if (watchedButtonEl.classList.contains("library-btn--active")) {
+//                         showWatchedFilms();
+//                 } else {
+//                         showQueuedFilms();
+//                 }
+//         }
+// }
+
+
+// // ================================================================================================================
+// // Deattach keyboard and mouse events
+//         refs.modalDetailOverlay.removeEventListener("click", closeModal);
+//         document.removeEventListener("keydown", closeModal);
+
+//         // Deattach buttons events
+//         refs.watchBtn.removeEventListener("click", handleChangeStatus);
+//         refs.queueBtn.removeEventListener("click", handleChangeStatus);
+
+//         // Deattach trailer
+// deattachTrailer();
+//         // =======================================================================================================
