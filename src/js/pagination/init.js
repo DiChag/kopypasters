@@ -36,7 +36,7 @@ export function initPagination({ total_pages = 1, per_page = 20, param }) {
         // Resize pagination on mobile and tablet
         sq.addEventListener("change", (event) => {
                 if (event.matches) {
-                        myPager.update({ adjacent: 0 });
+                        myPager.update({ adjacent: 1 });
                 } else {
                         myPager.update({ adjacent: 3 });
                 }
@@ -52,6 +52,6 @@ export function initPagination({ total_pages = 1, per_page = 20, param }) {
         });
 
         // Init on run
-        sq.matches && !lq.matches && myPager.update({ adjacent: 0 });
+        sq.matches && !lq.matches && myPager.update({ adjacent: 1 });
         !sq.matches && lq.matches && myPager.update({ adjacent: 6 });
 }
