@@ -60,7 +60,6 @@ function showWatchedFilms() {
                 attachOnloadToCards(cards);
         } catch (error) {
                 displayMessage();
-                console.log(error);
         }
 }
 
@@ -73,7 +72,7 @@ export function getWatchedFromLocalStorage() {
                 const parsedFilmsData = JSON.parse(savedFilms);
                 return parsedFilmsData;
         } catch (error) {
-                console.log(error);
+                // console.log(error);
         }
 }
 
@@ -116,7 +115,6 @@ function showQueuedFilms() {
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
         } catch (error) {
                 displayMessage();
-                console.log(error);
         }
 }
 
@@ -130,7 +128,7 @@ export function getQueuedFromLocalStorage() {
 
                 return parsedFilmsData;
         } catch (error) {
-                console.log(error);
+                // console.log(error);
         }
 }
 
@@ -145,13 +143,12 @@ function renderQueuedFilms(queuedFilms) {
                 i += 1
         ) {
                 markup = markup + createMovieCard(queuedFilms[i]);
-                // debugger;
         }
 
         return markup;
 }
 
-//to display the message when there are no films in WATCHED/QUEUE:
+//to display the message when there are no films in Watched/Queue:
 
 function displayMessage() {
         const messageMarkup = `<p class="movies-section__message"> Oops, seems like it's empty. Go to <a href="./index.html" class="movies-section__message--bold">Home</a> to add some films.</p>`;
