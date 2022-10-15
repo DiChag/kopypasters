@@ -21,13 +21,13 @@ const refs = {
 
 function calculatePerPageBasedOnInnerWidth() {
         if (window.innerWidth > 0 && window.innerWidth < 768) {
-                return 4;
+                return { perPage: 4, adjustment: 7 };
         }
         if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-                return 8;
+                return { perPage: 8, adjustment: 11 };
         }
         if (window.innerWidth >= 1200) {
-                return 9;
+                return { perPage: 9, adjustment: 17 };
         }
 }
 
@@ -43,8 +43,13 @@ function showWatchedFilms() {
         clearGallery();
         try {
                 const watchedFilms = getWatchedFromLocalStorage();
-                let perPage = calculatePerPageBasedOnInnerWidth();
-                instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
+                let { perPage, adjustment } = calculatePerPageBasedOnInnerWidth();
+                instPagination.initPagination(
+                        watchedFilms.length,
+                        perPage,
+                        showWatchedFilms,
+                        adjustment,
+                );
                 const markup = renderWatchedFilms(watchedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
 
@@ -100,8 +105,13 @@ function showQueuedFilms() {
         clearGallery();
         try {
                 const queuedFilms = getQueuedFromLocalStorage();
-                let perPage = calculatePerPageBasedOnInnerWidth();
-                instPagination.initPagination(queuedFilms.length, perPage, showQueuedFilms);
+                let { perPage, adjustment } = calculatePerPageBasedOnInnerWidth();
+                instPagination.initPagination(
+                        queuedFilms.length,
+                        perPage,
+                        showQueuedFilms,
+                        adjustment,
+                );
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
         } catch (error) {

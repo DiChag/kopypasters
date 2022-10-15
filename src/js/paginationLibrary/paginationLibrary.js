@@ -142,7 +142,8 @@ export default class PaginationLibrary {
                 return txtOfBtn;
         }
 
-        initPagination(_totalElements, _perPage, renderCards) {
+        initPagination(_totalElements, _perPage, renderCards, adjastment) {
+                this.btnInPagination = adjastment;
                 this.totalElements = _totalElements;
                 this.perPage = _perPage;
                 // console.log(this.currentPage);
@@ -159,13 +160,63 @@ export default class PaginationLibrary {
                 if (totalOfBtn > 1) {
                         ul.appendChild(this.createLi("arrow-left", totalOfBtn));
                 }
+                let txtOfBtn = 0;
+                let centerOfPagination = (this.btnInPagination - 1) / 2 + 1;
+                console.log(centerOfPagination);
+                let centerOffcet = (this.btnInPagination - 5) / 2;
                 for (let i = 1; i <= countBtnInPagination; i += 1) {
-                        ul.appendChild(
-                                this.createLi(
-                                        this.getTextForPaginationBtn(totalOfBtn, i),
-                                        totalOfBtn,
-                                ),
-                        );
+                        txtOfBtn = i;
+                        if (
+                                i === 2 &&
+                                this.currentPage >= centerOfPagination &&
+                                totalOfBtn > this.btnInPagination
+                        ) {
+                                txtOfBtn = "...";
+                        }
+                        if (
+                                i > 2 &&
+                                i < countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage >= centerOfPagination &&
+                                this.currentPage <= totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = this.currentPage - centerOffcet;
+                                centerOffcet -= 1;
+                        }
+                        // debugger;
+                        if (
+                                i > 2 &&
+                                i < countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage >= centerOfPagination &&
+                                this.currentPage > totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = totalOfBtn - (this.btnInPagination - i);
+                        }
+                        if (
+                                i === countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage <= totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = "...";
+                        }
+                        if (
+                                i === countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage > totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = totalOfBtn - 1;
+                        }
+                        if (i === countBtnInPagination) {
+                                txtOfBtn = totalOfBtn;
+                        }
+                        // ul.appendChild(
+                        //         this.createLi(
+                        //                 this.getTextForPaginationBtn(totalOfBtn, i),
+                        //                 totalOfBtn,
+                        //         ),
+                        // );
+                        ul.appendChild(this.createLi(txtOfBtn, totalOfBtn));
                 }
                 if (totalOfBtn > 1) {
                         ul.appendChild(this.createLi("arrow-right", totalOfBtn));
