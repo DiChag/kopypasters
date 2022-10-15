@@ -19,27 +19,26 @@
     border-radius: 4px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
     background-color: $modal-detail-bg-color;
-    
+
     @include fonts($main-font-size, 16px, $main-font-weight, inherit);
 
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: minmax(100px, 1fr) 1fr;
-    grid-template-areas: 
-    "poster"
-    "info"
-    "buttons"; 
+    grid-template-areas:
+        "poster"
+        "info"
+        "buttons";
     row-gap: 20px;
     min-height: 484px;
     max-height: calc(100vh - 80px);
 
     @include mq("tablet") {
-
-        grid-template-columns: 1fr 1fr; 
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: minmax(300px, 1fr) 44px;
-        grid-template-areas: 
-          "poster info"
-          "poster buttons"; 
+        grid-template-areas:
+            "poster info"
+            "poster buttons";
 
         width: 704px;
         flex-direction: row;
@@ -92,7 +91,7 @@
 
     &__poster {
         position: relative;
-        grid-area: poster;        
+        grid-area: poster;
     }
 
     &__image {
@@ -117,7 +116,6 @@
             height: auto;
             overflow-y: auto;
         }
-
     }
 
     &__title {
@@ -165,11 +163,14 @@
     &__btn {
         height: 44px;
         border-radius: 5px;
+        position: relative;
+        overflow: hidden;
 
         @include fonts($main-font-size, 16px, $main-font-weight, inherit);
         text-transform: uppercase;
         background: $modal-detail-btn-bg;
-        border: 1px solid $modal-detail-btn-border;
+        //   border: 1px solid $modal-detail-btn-border;
+        border: none;
         color: $modal-detail-btn-color;
         cursor: pointer;
 
@@ -177,7 +178,17 @@
             padding: 4px 10px;
         }
     }
-
+    //  /btn border
+    &__line {
+        position: absolute;
+        display: block;
+    }
+    &__line--top {
+        top: 0;
+        width: 100%;
+        height: 2px;
+        background-color: teal;
+    }
     &__btn--active {
         background: $modal-detail-btn-active-bg;
         border: 1px solid $modal-detail-btn-hover-bg;
