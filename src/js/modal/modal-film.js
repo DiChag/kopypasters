@@ -194,9 +194,7 @@ function setButtonStatus(btn, { watched, queued }) {
                         !watched.bool
                                 ? refs.watchBtn.classList.add(activeClass)
                                 : refs.watchBtn.classList.remove(activeClass);
-                        refs.watchBtn.innerText = watched.bool
-                                ? labelAddToWatched
-                                : labelRemoveWatched;
+                        refs.watchBtn.value = watched.bool ? labelAddToWatched : labelRemoveWatched;
                         break;
 
                 // Queue button
@@ -204,9 +202,7 @@ function setButtonStatus(btn, { watched, queued }) {
                         !queued.bool
                                 ? refs.queueBtn.classList.add(activeClass)
                                 : refs.queueBtn.classList.remove(activeClass);
-                        refs.queueBtn.innerText = queued.bool
-                                ? labelAddToQueued
-                                : labelRemoveQueued;
+                        refs.queueBtn.value = queued.bool ? labelAddToQueued : labelRemoveQueued;
                         break;
 
                 // All buttons
@@ -217,12 +213,10 @@ function setButtonStatus(btn, { watched, queued }) {
                         queued.bool
                                 ? refs.queueBtn.classList.add(activeClass)
                                 : refs.queueBtn.classList.remove(activeClass);
-                        refs.watchBtn.innerText = !watched.bool
+                        refs.watchBtn.value = !watched.bool
                                 ? labelAddToWatched
                                 : labelRemoveWatched;
-                        refs.queueBtn.innerText = !queued.bool
-                                ? labelAddToQueued
-                                : labelRemoveQueued;
+                        refs.queueBtn.value = !queued.bool ? labelAddToQueued : labelRemoveQueued;
                         break;
         }
 }
