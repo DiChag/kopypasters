@@ -52,9 +52,11 @@ $movies-message-color: #fff;
 $modal-detail-voteavg-bg: #ff6b08;
 $modal-detail-voteavg-color: #fff;
 $modal-detail-btn-bg: #fff;
+$modal-detail-btn-active-color: #fff;
 $modal-detail-btn-border: #000;
 $modal-detail-btn-color: #000;
-$modal-detail-btn-active-bg: #ffc3a7;
+$modal-detail-btn-active-bg: rgba(255, 195, 167, 0.25);
+$modal-detail-btn-active-bg-darkTheme: rgba(204, 204, 204, 0.25);
 $modal-detail-btn-hover-bg: #ff6b01;
 $modal-detail-btn-hover-color: #fff;
 

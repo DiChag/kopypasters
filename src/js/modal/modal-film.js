@@ -195,6 +195,7 @@ function setButtonStatus(btn, { watched, queued }) {
                                 ? refs.watchBtn.classList.add(activeClass)
                                 : refs.watchBtn.classList.remove(activeClass);
                         refs.watchBtn.value = watched.bool ? labelAddToWatched : labelRemoveWatched;
+
                         break;
 
                 // Queue button

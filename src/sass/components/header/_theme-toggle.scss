@@ -104,8 +104,18 @@ body.dark-theme {
     }
 
     // Модальне вікно картки
-    & .modal-detail {
+    & .modal-detail,
+    & .modal-detail__btn {
         background-color: $dark-modal-detail-bg-color;
+    }
+    & .modal-detail__btn {
+        color: #fff;
+        font-weight: bold;
+    }
+    & .modal-detail__btn--active {
+        color: $modal-detail-btn-hover-bg;
+        font-size: bold;
+        background-color: $modal-detail-btn-active-bg-darkTheme;
     }
 
     & .modal-detail__title {

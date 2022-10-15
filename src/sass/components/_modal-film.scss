@@ -164,8 +164,7 @@
         height: 44px;
         border-radius: 5px;
         position: relative;
-        //   overflow: hidden;
-        transition: 0.2s;
+        overflow: hidden;
 
         @include fonts($main-font-size, 16px, $main-font-weight, inherit);
         text-transform: uppercase;
@@ -180,7 +179,7 @@
         }
     }
 
-    //  /btn border
+    //  btn  lines
     &__line {
         position: absolute;
         display: block;
@@ -189,21 +188,37 @@
         top: 0;
         left: -100%;
         width: 90%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, teal);
+        height: 3px;
+        background: linear-gradient(90deg, transparent, $modal-detail-btn-hover-bg);
     }
     &__line--bottom {
         bottom: 0;
         right: -97%;
         width: 90%;
-        height: 2px;
-        background: linear-gradient(270deg, transparent, teal);
+        height: 3px;
+        background: linear-gradient(270deg, transparent, $modal-detail-btn-hover-bg);
+    }
+    &__line--left {
+        bottom: -100%;
+        left: 0;
+        width: 3px;
+        height: 90%;
+        background: linear-gradient(0deg, transparent, $modal-detail-btn-hover-bg);
+    }
+    &__line--right {
+        top: -100%;
+        right: 0;
+        width: 3px;
+        height: 90%;
+        background: linear-gradient(180deg, transparent, $modal-detail-btn-hover-bg);
     }
 
     &__btn--active {
         background: $modal-detail-btn-active-bg;
-        border: 1px solid $modal-detail-btn-hover-bg;
-        color: #832626;
+        border: none;
+        border-radius: 5px;
+        color: $modal-detail-btn-hover-bg;
+        font-weight: bold;
     }
 
     &__trailer-btn:disabled {
@@ -217,6 +232,10 @@
             // border: 1px solid $modal-detail-btn-hover-bg;
             color: $modal-detail-btn-hover-color;
             cursor: pointer;
+            transition: 0.2s $timing-function;
+            transition-delay: 0.5s;
+            box-shadow: 0 0 10px $modal-detail-btn-hover-bg, 0 0 40px $modal-detail-btn-hover-bg,
+                0 0 80px $modal-detail-btn-hover-bg;
         }
     }
     @media (hover: none) {
@@ -228,14 +247,24 @@
         }
     }
 }
-
+// btn hover effects
 .modal-detail__btn:hover .modal-detail__line--top {
     left: 88%;
     transition: 1s;
-    transition-delay: 0.25s;
+    transition-delay: 0.1s;
 }
 .modal-detail__btn:hover .modal-detail__line--bottom {
     right: 88%;
     transition: 1s;
-    transition-delay: 0.25s;
+    transition-delay: 0.1s;
+}
+.modal-detail__btn:hover .modal-detail__line--left {
+    bottom: 88%;
+    transition: 1s;
+    transition-delay: 0.1s;
+}
+.modal-detail__btn:hover .modal-detail__line--right {
+    top: 88%;
+    transition: 1s;
+    transition-delay: 0.1s;
 }
