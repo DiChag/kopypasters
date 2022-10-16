@@ -1,4 +1,4 @@
-const themeToggleBtn = document.querySelector(".theme-toggle__btn");
+const themeToggleBtn = document.querySelector(".theme-toggle__wrapper");
 
 if (localStorage.getItem("dark-theme")) {
         document.querySelector("body").classList.add("dark-theme");

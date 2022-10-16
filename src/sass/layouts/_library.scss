@@ -33,10 +33,16 @@
     border: 1px solid #ffffff;
     text-align: center;
 
+    padding: 10px;
     text-transform: uppercase;
     color: #ffffff;
     font-size: 12px;
     font-weight: 500;
+    transition: 0.5s $timing-function;
+    
+    &:hover {
+        box-shadow: 0 0 20px rgba(246, 243, 243, 0.5);
+    }
 
     @include mq("tablet") {
         min-width: 152px;
@@ -47,7 +53,15 @@
         height: 42px;
     }
     &--active {
-        background-color: #ff6b08;
+        background-color: rgba(255, 107, 8, 1);
+        // box-shadow: 0 0 10px $modal-detail-btn-hover-bg, 0 0 40px $modal-detail-btn-hover-bg,
+        //     0 0 80px $modal-detail-btn-hover-bg, 0 0 120px $modal-detail-btn-hover-bg,
+        //     0 0 200px $modal-detail-btn-hover-bg;
         border: transparent;
+    }
+
+    &--active:hover {
+        background: rgba(240, 116, 0, 0.909);
+        box-shadow: 0 0 20px rgba(246, 243, 243, 0.5);
     }
 }
