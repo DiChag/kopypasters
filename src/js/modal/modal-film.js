@@ -41,7 +41,6 @@ const refs = {
         watchBtn: document.getElementById("watch-btn"),
         queueBtn: document.getElementById("queue-btn"),
 };
-
 // Init attaching
 export default function initModalFilmDetails() {
         refs.grid.addEventListener("click", openMovieDetailModal);
@@ -181,10 +180,26 @@ const handleChangeStatus = (e) => {
 // Change style of buttons
 function setButtonStatus(btn, { watched, queued }) {
         // Labels
-        const labelAddToWatched = "Add to Watched";
-        const labelRemoveWatched = "Remove watched";
-        const labelAddToQueued = "Add to Queue";
-        const labelRemoveQueued = "Remove queued";
+        const labelAddToWatched = `<span class="modal-detail__line modal-detail__line--top"></span>
+        <span class="modal-detail__line modal-detail__line--left"></span>
+        <span class="modal-detail__line modal-detail__line--bottom"></span>
+        <span class="modal-detail__line modal-detail__line--right"></span>
+        Add to Watched`;
+        const labelRemoveWatched = `<span class="modal-detail__line modal-detail__line--top"></span>
+        <span class="modal-detail__line modal-detail__line--left"></span>
+        <span class="modal-detail__line modal-detail__line--bottom"></span>
+        <span class="modal-detail__line modal-detail__line--right"></span>
+        Remove Watched`;
+        const labelAddToQueued = `<span class="modal-detail__line modal-detail__line--top"></span>
+        <span class="modal-detail__line modal-detail__line--left"></span>
+        <span class="modal-detail__line modal-detail__line--bottom"></span>
+        <span class="modal-detail__line modal-detail__line--right"></span>
+        Add to Queue`;
+        const labelRemoveQueued = `<span class="modal-detail__line modal-detail__line--top"></span>
+        <span class="modal-detail__line modal-detail__line--left"></span>
+        <span class="modal-detail__line modal-detail__line--bottom"></span>
+        <span class="modal-detail__line modal-detail__line--right"></span>
+        Remove Queue`;
         const activeClass = "modal-detail__btn--active";
 
         // Select button from argument
@@ -194,7 +209,9 @@ function setButtonStatus(btn, { watched, queued }) {
                         !watched.bool
                                 ? refs.watchBtn.classList.add(activeClass)
                                 : refs.watchBtn.classList.remove(activeClass);
-                        refs.watchBtn.value = watched.bool ? labelAddToWatched : labelRemoveWatched;
+                        refs.watchBtn.innerHTML = watched.bool
+                                ? labelAddToWatched
+                                : labelRemoveWatched;
 
                         break;
 
@@ -203,7 +220,9 @@ function setButtonStatus(btn, { watched, queued }) {
                         !queued.bool
                                 ? refs.queueBtn.classList.add(activeClass)
                                 : refs.queueBtn.classList.remove(activeClass);
-                        refs.queueBtn.value = queued.bool ? labelAddToQueued : labelRemoveQueued;
+                        refs.queueBtn.innerHTML = queued.bool
+                                ? labelAddToQueued
+                                : labelRemoveQueued;
                         break;
 
                 // All buttons
@@ -214,10 +233,12 @@ function setButtonStatus(btn, { watched, queued }) {
                         queued.bool
                                 ? refs.queueBtn.classList.add(activeClass)
                                 : refs.queueBtn.classList.remove(activeClass);
-                        refs.watchBtn.value = !watched.bool
+                        refs.watchBtn.innerHTML = !watched.bool
                                 ? labelAddToWatched
                                 : labelRemoveWatched;
-                        refs.queueBtn.value = !queued.bool ? labelAddToQueued : labelRemoveQueued;
+                        refs.queueBtn.innerHTML = !queued.bool
+                                ? labelAddToQueued
+                                : labelRemoveQueued;
                         break;
         }
 }
