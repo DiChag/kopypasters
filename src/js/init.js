@@ -5,7 +5,7 @@ import { getGenres } from "./movies/genres";
 export let isHome;
 
 function init() {
-        console.log("init");
+        // Check that current page is Index
         isHome = document.title === "Kinoteka" ? true : false;
 
         // Init modal window for film details
@@ -14,6 +14,7 @@ function init() {
         // Fetching genres and save to localstore
         getGenres();
 
+        // Index or Library
         if (isHome) {
                 // Init home page
                 initHome();

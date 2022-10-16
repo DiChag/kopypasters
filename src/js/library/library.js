@@ -138,6 +138,12 @@ function showQueuedFilms() {
                 );
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
+
+                // Get all cards
+                const cards = document.querySelectorAll(".movies-section__card");
+
+                // Add events to cards
+                attachOnloadToCards(cards);
         } catch (error) {
                 displayMessage();
         }

@@ -54,7 +54,7 @@ function initNextCard(gallery) {
 }
 
 // Add events on pictures and checking downloading complete
-export function attachOnloadToCards(cards) {
+export function attachOnloadToCards(cards) {        
         cards.forEach((card) => {
                 // Get link and img refs
                 const img = card.firstElementChild;

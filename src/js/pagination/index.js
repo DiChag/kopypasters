@@ -136,7 +136,7 @@ function createPreNext (pageCount, pager, mode) {
       value: item.value,
       title: item.title,
       liClass: disabled ? _config.disableClass : '',
-      action: function (value) {
+      action: function () {
         if (!disabled) {
           internalAction(item.page, pager)
         }
@@ -220,7 +220,7 @@ class Pagination {
     })
   }
 
-  update({adjacent}){
+  update({adjacent}){    
     this.adjacent = adjacent;
     build(this);
   }
