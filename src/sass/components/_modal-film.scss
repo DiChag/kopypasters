@@ -236,7 +236,11 @@
 
     @media (hover: hover) {
         &__btn:hover:enabled {
-            border: none;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            border-top: none;
+            border-bottom: none;
+
             background: $modal-detail-btn-hover-bg;
             // border: 1px solid $modal-detail-btn-hover-bg;
             color: $modal-detail-btn-hover-color;
