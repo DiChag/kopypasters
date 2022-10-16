@@ -223,7 +223,7 @@
 
     &__btn--active {
         background: $modal-detail-btn-active-bg;
-        border: none;
+        border: 1px solid transparent;
         border-radius: 5px;
         color: $modal-detail-btn-hover-bg;
         font-weight: bold;
