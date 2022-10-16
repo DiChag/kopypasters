@@ -1,12 +1,14 @@
 const themeToggleBtn = document.querySelector(".theme-toggle__wrapper");
 
 if (localStorage.getItem("dark-theme")) {
-        document.querySelector("body").classList.add("dark-theme");
+        document.querySelector("body").classList.toggle("dark-theme");
 }
 
 themeToggleBtn.addEventListener("click", onThemeToggleBtnClick);
 
 function onThemeToggleBtnClick() {
+        localStorage.removeItem("dark-theme");
+
         const themeBtn = document.querySelector(".theme-toggle__thumb");
         //   themeBtn.style.backgroundColor = "teal";
         themeBtn.classList.toggle(".theme-toggle__thumb");

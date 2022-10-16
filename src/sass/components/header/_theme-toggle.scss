@@ -6,22 +6,25 @@
 }
 // Slider
 .theme-toggle__thumb {
+    transition: 0.5s;
     position: absolute;
     top: 1px;
-    left: 25px;
+    left: 2px;
+    box-shadow: $moon-shadow;
+
     width: 22px;
     height: 22px;
     border-radius: 50%;
     background-color: #ae191b;
     box-sizing: border-box;
     transform: translateX(0);
-    box-shadow: $sun-shadow;
 
     &--after {
+        transition: 0.5s;
         position: absolute;
         top: 1px;
-        left: 2px;
-        box-shadow: $moon-shadow;
+        left: 25px;
+        box-shadow: $sun-shadow;
     }
 }
 
