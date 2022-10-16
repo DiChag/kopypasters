@@ -1,6 +1,7 @@
 import { createMovieCard } from "../movies/movieCard";
 import { attachOnloadToCards } from "../movies/moviesList";
 import PaginationLibrary from "../paginationLibrary/paginationLibrary";
+import { isHome } from "../init";
 
 const instPagination = new PaginationLibrary(9);
 instPagination.paginationContainer = "paginationLibrary";
@@ -19,15 +20,39 @@ const refs = {
         gallery: document.querySelector(".movies-section__grid"),
 };
 
-function calculatePerPageBasedOnInnerWidth() {
+// Medias
+const sq = window.matchMedia("screen and (max-width: 767px)");
+const lq = window.matchMedia("screen and (min-width: 1200px)");
+
+// Resize pagination on mobile and tablet
+sq.addEventListener("change", (event) => {
+        if (!isHome) {
+                let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
+                instPagination.per_Page = perPage;
+                instPagination.adjastment = adjustment;
+                instPagination.update();
+        }
+});
+
+// Resize pagination on tablet and desktop
+lq.addEventListener("change", (event) => {
+        if (!isHome) {
+                let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
+                instPagination.per_Page = perPage;
+                instPagination.adjastment = adjustment;
+                instPagination.update();
+        }
+});
+
+function calculateAdjustmentBasedOnInnerWidth() {
         if (window.innerWidth > 0 && window.innerWidth < 768) {
-                return 4;
+                return { perPage: 9, adjustment: 7 };
         }
         if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-                return 8;
+                return { perPage: 9, adjustment: 11 };
         }
         if (window.innerWidth >= 1200) {
-                return 9;
+                return { perPage: 9, adjustment: 17 };
         }
 }
 
@@ -43,8 +68,13 @@ function showWatchedFilms() {
         clearGallery();
         try {
                 const watchedFilms = getWatchedFromLocalStorage();
-                let perPage = calculatePerPageBasedOnInnerWidth();
-                instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
+                let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
+                instPagination.initPagination(
+                        watchedFilms.length,
+                        perPage,
+                        showWatchedFilms,
+                        adjustment,
+                );
                 const markup = renderWatchedFilms(watchedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
 
@@ -99,8 +129,13 @@ function showQueuedFilms() {
         clearGallery();
         try {
                 const queuedFilms = getQueuedFromLocalStorage();
-                let perPage = calculatePerPageBasedOnInnerWidth();
-                instPagination.initPagination(queuedFilms.length, perPage, showQueuedFilms);
+                let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
+                instPagination.initPagination(
+                        queuedFilms.length,
+                        perPage,
+                        showQueuedFilms,
+                        adjustment,
+                );
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
         } catch (error) {
