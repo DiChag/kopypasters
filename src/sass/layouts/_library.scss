@@ -32,7 +32,8 @@
     background-color: transparent;
     border: 1px solid #ffffff;
     text-align: center;
-
+    
+    padding: 10px;
     text-transform: uppercase;
     color: #ffffff;
     font-size: 12px;
@@ -50,4 +51,8 @@
         background-color: #ff6b08;
         border: transparent;
     }
+}
+.library-btn--active:hover{
+background: rgba(240, 116, 0, 0.909);
+box-shadow: 0 0 20px rgba(246, 243, 243, 0.5); 
 }
