@@ -163,6 +163,11 @@ function showQueuedFilms() {
 
                         nextBtn.addEventListener("click", nextPageShowQueuedFilms);
                 }
+                // Get all cards
+                const cards = document.querySelectorAll(".movies-section__card");
+
+                // Add events to cards
+                attachOnloadToCards(cards);
         } catch (error) {
                 displayMessage();
         }

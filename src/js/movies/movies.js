@@ -1,13 +1,14 @@
 import { fetchMovie } from "../services/fetch";
 import { debounce } from "lodash";
 import { renderMoviesList } from "./moviesList";
-import { loadingSpinnerToggle } from "../interface/spinner";
 import { warningMessage } from "../interface/warning-message";
 import { initPagination } from "../pagination/init";
 import { fetchMovieDetailsById } from "../services/fetch";
 import initHeaderSearchForm from "../header/header";
+import Spinner from "../interface/spinner";
 
 export const DEBOUNCE_DELAY = 300;
+const loadingSpinner = new Spinner();
 
 // Post http req and trying to get pictures
 async function getMovieByName(param) {
@@ -16,8 +17,7 @@ async function getMovieByName(param) {
                 warningMessage(false);
 
                 // Show loading spinner
-                loadingSpinnerToggle();
-                await new Promise((resolve) => setTimeout(resolve, 300));
+                loadingSpinner.show();
 
                 // Send http req, trying get the pictures
                 const response = await fetchMovie(param);
@@ -49,12 +49,11 @@ async function getMovieByName(param) {
                 // Initialization pagination
                 const { pagination } = param;
                 if (pagination) initPagination({ total_pages, param });
-                
         } catch (error) {
                 console.log(error);
         } finally {
                 // Hide loading spinner
-                loadingSpinnerToggle();
+                loadingSpinner.hide();
         }
 }
 
@@ -66,13 +65,12 @@ const getMovieByName_deb = debounce((param) => {
 // Fetch movie by ID
 async function getMovieById(id) {
         try {
-                // spinner
-                loadingSpinnerToggle();
-                // await new Promise((resolve) => setTimeout(resolve, 300));
+                // Show loading spinner
+                loadingSpinner.show();
 
                 // Send http req, trying get the pictures
                 const response = await fetchMovieDetailsById(id);
-
+                                
                 // Check statuses
                 if (response.status !== 200) {
                         throw new Error(response.status);
@@ -90,7 +88,7 @@ async function getMovieById(id) {
                 console.log(error);
         } finally {
                 // Hide loading spinner
-                loadingSpinnerToggle();
+                loadingSpinner.hide();
         }
 }
 

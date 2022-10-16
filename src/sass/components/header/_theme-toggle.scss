@@ -14,9 +14,11 @@
     border-radius: 50%;
     background-color: #ae191b;
     box-sizing: border-box;
-    transition: all 0.6s $timing-function 0ms;
     transform: translateX(0);
     box-shadow: $sun-shadow;
+
+    transition: 0.5s;
+
 
     &--after {
         position: absolute;
@@ -55,8 +57,7 @@
 body.dark-theme {
     // Головний колір body
     background-color: $dark-bg-color;
-    transition: all 0.45s $timing-function 0ms;
-
+    transition: 0.45s;
 
     // Стилізація кнопки
     & .theme-toggle__icon-sun {
@@ -141,4 +142,9 @@ body.dark-theme {
     & .movies-section__message {
         color: $dark-movies-message-color;
     }
+
+    // Кнопка наступна сторіка
+    .next-card__image-container {
+        background-color: rgb(31, 30, 30);
+    } 
 }
