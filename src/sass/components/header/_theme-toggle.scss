@@ -138,4 +138,9 @@ body.dark-theme {
     & .movies-section__message {
         color: $dark-movies-message-color;
     }
+
+    // Кнопка наступна сторіка
+    .next-card__image-container {
+        background-color: rgb(31, 30, 30);
+    } 
 }
