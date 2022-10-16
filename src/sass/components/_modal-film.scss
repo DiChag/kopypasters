@@ -170,7 +170,11 @@
         text-transform: uppercase;
         background: $modal-detail-btn-bg;
         //   border: 1px solid $modal-detail-btn-border;
-        border: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
+
         color: $modal-detail-btn-color;
         cursor: pointer;
 
@@ -178,7 +182,11 @@
             padding: 4px 10px;
         }
     }
-
+    &__btn {
+        border-right: 1px solid $modal-detail-btn-hover-bg;
+        border-left: 1px solid $modal-detail-btn-hover-bg;
+        transition: 0.3s linear;
+    }
     //  btn  lines
     &__line {
         position: absolute;
@@ -228,6 +236,7 @@
 
     @media (hover: hover) {
         &__btn:hover:enabled {
+            border: none;
             background: $modal-detail-btn-hover-bg;
             // border: 1px solid $modal-detail-btn-hover-bg;
             color: $modal-detail-btn-hover-color;
