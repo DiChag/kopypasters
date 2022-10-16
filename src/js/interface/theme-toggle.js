@@ -1,7 +1,7 @@
 const themeToggleBtn = document.querySelector(".theme-toggle__wrapper");
 
 if (!localStorage.getItem("dark-theme")) {
-        document.querySelector("body").classList.add("dark-theme");
+        document.querySelector("body").classList.toggle("dark-theme");
 }
 
 themeToggleBtn.addEventListener("click", onThemeToggleBtnClick);
