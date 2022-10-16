@@ -5,6 +5,7 @@ export default class PaginationLibrary {
                 this.totalElements = 0;
                 this.perPage = 0;
                 this.currentPage = 1;
+                this.renderCards = "";
                 this.paginationContainerClass = "";
                 this.btnInPagination = btnInPagination;
                 this.firstIndexOfArray = 0;
@@ -24,6 +25,22 @@ export default class PaginationLibrary {
 
         set current(newCurrentPage) {
                 this.currentPage = newCurrentPage;
+        }
+
+        get per_Page() {
+                return this.perPage;
+        }
+
+        set per_Page(newPerPage) {
+                this.perPage = newPerPage;
+        }
+
+        get adjastment() {
+                return this.btnInPagination;
+        }
+
+        set adjastment(newBtnInPagination) {
+                this.btnInPagination = newBtnInPagination;
         }
 
         clearPaginationLibrary() {
@@ -46,132 +63,70 @@ export default class PaginationLibrary {
                 }
         }
 
-        getTextForPaginationBtn(totalOfBtn, currentBtn) {
-                let txtOfBtn = "";
-                if (totalOfBtn > 9) {
-                        if (this.currentPage >= 5 && this.currentPage < totalOfBtn - 4) {
-                                switch (currentBtn) {
-                                        case 1: {
-                                                txtOfBtn = 1;
-                                                break;
-                                        }
-                                        case 2: {
-                                                txtOfBtn = "...";
-                                                break;
-                                        }
-                                        case 3: {
-                                                txtOfBtn = this.currentPage - 2;
-                                                break;
-                                        }
-                                        case 4: {
-                                                txtOfBtn = this.currentPage - 1;
-                                                break;
-                                        }
-                                        case 5: {
-                                                txtOfBtn = this.currentPage;
-                                                break;
-                                        }
-                                        case 6: {
-                                                txtOfBtn = this.currentPage + 1;
-                                                break;
-                                        }
-                                        case 7: {
-                                                txtOfBtn = this.currentPage + 2;
-                                                break;
-                                        }
-                                        case 8: {
-                                                txtOfBtn = "...";
-                                                break;
-                                        }
-                                        case 9: {
-                                                txtOfBtn = totalOfBtn;
-                                                break;
-                                        }
-                                }
-                        } else if (this.currentPage >= 5 && this.currentPage >= totalOfBtn - 4) {
-                                switch (currentBtn) {
-                                        case 1: {
-                                                txtOfBtn = 1;
-                                                break;
-                                        }
-                                        case 2: {
-                                                txtOfBtn = "...";
-                                                break;
-                                        }
-                                        case 3: {
-                                                txtOfBtn = totalOfBtn - 6;
-                                                break;
-                                        }
-                                        case 4: {
-                                                txtOfBtn = totalOfBtn - 5;
-                                                break;
-                                        }
-                                        case 5: {
-                                                txtOfBtn = totalOfBtn - 4;
-                                                break;
-                                        }
-                                        case 6: {
-                                                txtOfBtn = totalOfBtn - 3;
-                                                break;
-                                        }
-                                        case 7: {
-                                                txtOfBtn = totalOfBtn - 2;
-                                                break;
-                                        }
-                                        case 8: {
-                                                txtOfBtn = totalOfBtn - 1;
-                                                break;
-                                        }
-                                        case 9: {
-                                                txtOfBtn = totalOfBtn;
-                                                break;
-                                        }
-                                }
-                        } else {
-                                if (currentBtn === 8) {
-                                        txtOfBtn = "...";
-                                } else if (currentBtn === 9) {
-                                        txtOfBtn = totalOfBtn;
-                                } else {
-                                        txtOfBtn = currentBtn;
-                                }
-                        }
-                } else {
-                        txtOfBtn = currentBtn;
-                }
-                return txtOfBtn;
-        }
-
-        initPagination(_totalElements, _perPage, renderCards) {
-                this.totalElements = _totalElements;
-                this.perPage = _perPage;
-                // console.log(this.currentPage);
-                // this.currentPage = Number(currentPage);
+        update() {
                 this.clearPaginationLibrary();
                 const ul = document.createElement("ul");
                 ul.classList.add("paginationLibrary-list");
-                // console.log("totalElements", totalElements);
-                // console.log("PerPage", perPage);
                 const totalOfBtn = Math.ceil(this.totalElements / this.perPage);
                 this.currentPage = this.currentPage > totalOfBtn ? totalOfBtn : this.currentPage;
-                // console.log(totalOfBtn);
                 const countBtnInPagination = Math.min(totalOfBtn, this.btnInPagination);
                 if (totalOfBtn > 1) {
                         ul.appendChild(this.createLi("arrow-left", totalOfBtn));
                 }
+                let txtOfBtn = 0;
+                let centerOfPagination = (this.btnInPagination - 1) / 2 + 1;
+                let centerOffcet = (this.btnInPagination - 5) / 2;
                 for (let i = 1; i <= countBtnInPagination; i += 1) {
-                        ul.appendChild(
-                                this.createLi(
-                                        this.getTextForPaginationBtn(totalOfBtn, i),
-                                        totalOfBtn,
-                                ),
-                        );
+                        txtOfBtn = i;
+                        if (
+                                i === 2 &&
+                                this.currentPage >= centerOfPagination &&
+                                totalOfBtn > this.btnInPagination
+                        ) {
+                                txtOfBtn = "...";
+                        }
+                        if (
+                                i > 2 &&
+                                i < countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage >= centerOfPagination &&
+                                this.currentPage <= totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = this.currentPage - centerOffcet;
+                                centerOffcet -= 1;
+                        }
+                        if (
+                                i > 2 &&
+                                i < countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage >= centerOfPagination &&
+                                this.currentPage > totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = totalOfBtn - (this.btnInPagination - i);
+                        }
+                        if (
+                                i === countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage <= totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = "...";
+                        }
+                        if (
+                                i === countBtnInPagination - 1 &&
+                                totalOfBtn > this.btnInPagination &&
+                                this.currentPage > totalOfBtn - centerOfPagination
+                        ) {
+                                txtOfBtn = totalOfBtn - 1;
+                        }
+                        if (i === countBtnInPagination) {
+                                txtOfBtn = totalOfBtn;
+                        }
+                        ul.appendChild(this.createLi(txtOfBtn, totalOfBtn));
                 }
                 if (totalOfBtn > 1) {
                         ul.appendChild(this.createLi("arrow-right", totalOfBtn));
                 }
                 ul.addEventListener("click", (evt) => {
-                        // console.log(evt.target.nodeName);
                         if (
                                 evt.target.nodeName !== "LI" &&
                                 evt.target.nodeName !== "svg" &&
@@ -179,7 +134,11 @@ export default class PaginationLibrary {
                         ) {
                                 return;
                         }
-                        this.action(evt.target.dataset.page, renderCards);
+                        if (evt.target.nodeName === "use") {
+                                this.action(evt.target.parentNode.dataset.page, this.renderCards);
+                        } else {
+                                this.action(evt.target.dataset.page, this.renderCards);
+                        }
                 });
                 const paginationContainer = document.querySelector(
                         `.${this.paginationContainerClass}`,
@@ -187,12 +146,17 @@ export default class PaginationLibrary {
                 paginationContainer.appendChild(ul);
         }
 
+        initPagination(_totalElements, _perPage, renderCards, adjastment) {
+                this.btnInPagination = adjastment;
+                this.totalElements = _totalElements;
+                this.perPage = _perPage;
+                this.renderCards = renderCards;
+                this.update();
+        }
+
         action(page, renderCards) {
-                // Function that rewrite movie form localStorage must be here
                 this.currentPage = Number(page);
                 renderCards();
-                // this.initPagination(this.totalElements, this.perPage, renderCards);
-                // console.log(this.currentPage);
         }
 
         createLi(item, totalOfBtn) {
@@ -201,25 +165,22 @@ export default class PaginationLibrary {
                 let isArrowRight = "";
                 const li = document.createElement("li");
                 if (item === "arrow-left") {
-                        item = this.currentPage - 1;
+                        item = Number(this.currentPage) - 1;
                         const svg = arrowIcon("left", 16, 16);
                         svg.classList.add("paginationLibrary-list__icon");
                         txt = svg;
-                        // txt = document.createTextNode("<-");
-                        svg.dataset.page = item;
+                        svg.dataset.page = Number(item);
                         isArrowLeft = true;
                 } else if (item === "arrow-right") {
-                        item = this.currentPage + 1;
+                        item = Number(this.currentPage) + 1;
                         const svg = arrowIcon("right", 16, 16);
                         svg.classList.add("paginationLibrary-list__icon");
                         txt = svg;
-                        // txt = document.createTextNode("->");
-                        svg.dataset.page = item;
+                        svg.dataset.page = Number(item);
                         isArrowRight = true;
                 } else {
                         txt = document.createTextNode(item);
                 }
-                // console.log(txt);
                 li.appendChild(txt);
                 li.classList.add("paginationLibrary-list__item");
                 if (isArrowRight || isArrowLeft) {
@@ -232,17 +193,13 @@ export default class PaginationLibrary {
                 ) {
                         li.classList.add("disabled");
                 }
-                // console.log("total", totalOfBtn);
-                // console.log("current", currentPage);
                 if (Number(item) === Number(this.currentPage)) {
                         li.classList.add("paginationLibrary-list__item--active");
                 }
                 if (item >= 100) {
                         li.classList.add("paginationLibrary-list__item--smallLeftPadding");
                 }
-                // li.setAttribute('name', item === '...' ? `btnDot` : `btn` + item);
-                // li.setAttribute('title', item === '...' ? `dots` : item);
-                li.dataset.page = item;
+                li.dataset.page = Number(item);
                 return li;
         }
 }
