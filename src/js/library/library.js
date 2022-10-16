@@ -30,7 +30,11 @@ window.addEventListener(
                         let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
                         instPagination.per_Page = perPage;
                         instPagination.adjastment = adjustment;
-                        instPagination.action(instPagination.current, showWatchedFilms);
+                        if (refs.watchedBtn.classList.contains("library-btn--active")) {
+                                instPagination.action(instPagination.current, showWatchedFilms);
+                        } else {
+                                instPagination.action(instPagination.current, showQueuedFilms);
+                        }
                 }
         }, 500),
 );
@@ -60,6 +64,19 @@ function nextPageShowQueuedFilms() {
         instPagination.action(instPagination.current + 1, showQueuedFilms);
 }
 
+function insertNextPage(funcOnClick) {
+        if (instPagination.getAdjastment() === 11) {
+                refs.gallery.insertAdjacentHTML("beforeend", nextCard);
+
+                const nextCardDiv = document.querySelector(".next-card");
+                nextCardDiv.style.display = "block";
+                const nextCardImg = document.querySelector(".next-card__image");
+                nextCardImg.style.width = "336px";
+                const nextBtn = document.querySelector(".next-card__container");
+                nextBtn.addEventListener("click", funcOnClick);
+        }
+}
+
 // Watched
 function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
@@ -77,16 +94,7 @@ function showWatchedFilms() {
                 const markup = renderWatchedFilms(watchedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
 
-                if (adjustment === 11) {
-                        refs.gallery.insertAdjacentHTML("beforeend", nextCard);
-
-                        const nextCardDiv = document.querySelector(".next-card");
-                        nextCardDiv.style.display = "block";
-                        const nextCardImg = document.querySelector(".next-card__image");
-                        nextCardImg.style.width = "336px";
-                        const nextBtn = document.querySelector(".next-card__container");
-                        nextBtn.addEventListener("click", nextPageShowWatchedFilms);
-                }
+                insertNextPage(nextPageShowWatchedFilms);
 
                 // Get all cards
                 const cards = document.querySelectorAll(".movies-section__card");
@@ -150,13 +158,7 @@ function showQueuedFilms() {
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
 
-                if (adjustment === 11) {
-                        refs.gallery.insertAdjacentHTML("beforeend", nextCard);
-
-                        const nextBtn = document.querySelector(".next-card__container");
-
-                        nextBtn.addEventListener("click", nextPageShowQueuedFilms);
-                }
+                insertNextPage(nextPageShowQueuedFilms);
                 // Get all cards
                 const cards = document.querySelectorAll(".movies-section__card");
 

@@ -36,6 +36,10 @@ export default class PaginationLibrary {
                 this.perPage = newPerPage;
         }
 
+        getAdjastment() {
+                return this.btnInPagination;
+        }
+
         get adjastment() {
                 return this.btnInPagination;
         }
