@@ -2,6 +2,7 @@ import { createMovieCard } from "../movies/movieCard";
 import { attachOnloadToCards } from "../movies/moviesList";
 import PaginationLibrary from "../paginationLibrary/paginationLibrary";
 import { isHome } from "../init";
+import { nextCard } from "../movies/nextCard";
 
 const instPagination = new PaginationLibrary(9);
 instPagination.paginationContainer = "paginationLibrary";
@@ -61,6 +62,14 @@ function handleShowWatchedFilms() {
         showWatchedFilms();
 }
 
+function nextPageShowWatchedFilms() {
+        instPagination.action(instPagination.current + 1, showWatchedFilms);
+}
+
+function nextPageShowQueuedFilms() {
+        instPagination.action(instPagination.current + 1, showQueuedFilms);
+}
+
 // Watched
 function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
@@ -77,6 +86,14 @@ function showWatchedFilms() {
                 );
                 const markup = renderWatchedFilms(watchedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
+
+                if (adjustment === 11) {
+                        refs.gallery.insertAdjacentHTML("beforeend", nextCard);
+
+                        const nextBtn = document.querySelector(".next-card__container");
+
+                        nextBtn.addEventListener("click", nextPageShowWatchedFilms);
+                }
 
                 // Get all cards
                 const cards = document.querySelectorAll(".movies-section__card");
@@ -138,6 +155,14 @@ function showQueuedFilms() {
                 );
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
+
+                if (adjustment === 11) {
+                        refs.gallery.insertAdjacentHTML("beforeend", nextCard);
+
+                        const nextBtn = document.querySelector(".next-card__container");
+
+                        nextBtn.addEventListener("click", nextPageShowQueuedFilms);
+                }
         } catch (error) {
                 displayMessage();
         }
