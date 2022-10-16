@@ -9,8 +9,8 @@
     transition: 0.5s;
     position: absolute;
     top: 1px;
-    left: 2px;
-    box-shadow: $moon-shadow;
+    left: 25px;
+    box-shadow: $sun-shadow;
 
     width: 22px;
     height: 22px;
@@ -22,9 +22,10 @@
     &--after {
         transition: 0.5s;
         position: absolute;
+
         top: 1px;
-        left: 25px;
-        box-shadow: $sun-shadow;
+        left: 2px;
+        box-shadow: $moon-shadow;
     }
 }
 
