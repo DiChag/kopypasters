@@ -55,6 +55,8 @@
 body.dark-theme {
     // Головний колір body
     background-color: $dark-bg-color;
+    transition: all 0.6s $timing-function 0ms;
+
 
     // Стилізація кнопки
     & .theme-toggle__icon-sun {
