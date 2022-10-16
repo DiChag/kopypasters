@@ -4,4 +4,6 @@ body {
     background-color: $bg-color;
     color: $font-color;
     @include fonts(14px, 16.41px, 400);
+
+    transition: 0.6s;
 }
