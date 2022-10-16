@@ -4,7 +4,6 @@ import { renderMoviesList } from "./moviesList";
 import { loadingSpinnerToggle } from "../interface/spinner";
 import { warningMessage } from "../interface/warning-message";
 import { initPagination } from "../pagination/init";
-import { loadingSpinnerToggle } from "../interface/spinner";
 import { fetchMovieDetailsById } from "../services/fetch";
 import initHeaderSearchForm from "../header/header";
 
@@ -69,7 +68,7 @@ async function getMovieById(id) {
         try {
                 // spinner
                 loadingSpinnerToggle();
-                await new Promise((resolve) => setTimeout(resolve, 300));
+                // await new Promise((resolve) => setTimeout(resolve, 300));
 
                 // Send http req, trying get the pictures
                 const response = await fetchMovieDetailsById(id);

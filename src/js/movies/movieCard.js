@@ -57,6 +57,7 @@ export function createMovieCard(movie) {
         const date = release_date ? release_date.slice(0, 4) : false;
 
         // Markup card
+        // prettier-ignore
         const movieCard = `
 
                 <div class="movies-section__card" data-id=${id || 0}>

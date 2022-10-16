@@ -6,7 +6,7 @@ import {
         showQueuedFilms,
         showWatchedFilms,
 } from "../library/library";
-import { deattachTrailer, initTrailer } from "./trailer";
+import { checkStatusTrailer, deattachTrailer, initTrailer, openVideoTrailer } from "./trailer";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
@@ -294,6 +294,12 @@ function closeModal(e) {
 
                 // Not close buttons
                 if (e.target.classList.contains("modal-detail__btn")) return;
+        }
+
+        // If opened trailer video - close it
+        if (checkStatusTrailer()) {
+                openVideoTrailer(false);
+                return;
         }
 
         // Toggle hidden class
