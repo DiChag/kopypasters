@@ -45,8 +45,8 @@
     border: none;
     cursor: pointer;
 }
-.footer__link:hover{
-    color:  #ff6b08;
+.footer__link:hover {
+    color: #ff6b08;
 }
 
 .footer__link::after {
@@ -127,15 +127,17 @@
 
 .footer-modal__title {
     font-size: 16px;
+    font-weight: 500;
     margin: 0 auto;
-    
 
     @include mq(tablet) {
         font-size: 18px;
+        font-weight: 500;
     }
 
     @include mq(desktop) {
         font-size: 20px;
+        font-weight: 500;
     }
 }
 
@@ -161,7 +163,7 @@
     height: 30px;
     stroke: black;
 }
-.footer-modal__icon-close:hover{
+.footer-modal__icon-close:hover {
     stroke: #f7f7f7;
 }
 
@@ -240,8 +242,7 @@
         font-weight: 500;
         font-size: 14px;
     }
-    
 }
-.team__title:hover{
+.team__title:hover {
     color: #fff;
 }
