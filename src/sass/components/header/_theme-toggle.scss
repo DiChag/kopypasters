@@ -17,6 +17,9 @@
     transform: translateX(0);
     box-shadow: $sun-shadow;
 
+    transition: 0.5s;
+
+
     &--after {
         position: absolute;
         top: 1px;
@@ -54,6 +57,7 @@
 body.dark-theme {
     // Головний колір body
     background-color: $dark-bg-color;
+    transition: 0.45s;
 
     // Стилізація кнопки
     & .theme-toggle__icon-sun {
