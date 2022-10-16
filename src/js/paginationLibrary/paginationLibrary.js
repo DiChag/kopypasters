@@ -1,4 +1,5 @@
 import { arrowIcon } from "../interface/arrow-icon";
+import { scrollToTop } from "../pagination/util";
 
 export default class PaginationLibrary {
         constructor(btnInPagination) {
@@ -157,6 +158,7 @@ export default class PaginationLibrary {
         action(page, renderCards) {
                 this.currentPage = Number(page);
                 renderCards();
+                scrollToTop();
         }
 
         createLi(item, totalOfBtn) {
