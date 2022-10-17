@@ -40,6 +40,9 @@ export function initTrailer(trailersList) {
         // Return
         if (!trailer) return;
 
+        // Set href to button on the poster
+        trailer && refs.youtubeIconOnPoster.setAttribute("href", trailer);
+
         // Enable buttons if trailer is founded
         refs.openTrailerBtn.removeAttribute("disabled");
         refs.youtubeIconOnPoster.style.display = "block";
@@ -65,7 +68,7 @@ export function openVideoTrailer() {
 
         // Get ref to player
         refs.backdropTrailer = document.querySelector(".backdrop__trailer");
-
+        
         // Set href to button on the poster
         trailer && refs.youtubeIconOnPoster.setAttribute("href", trailer);
 }
