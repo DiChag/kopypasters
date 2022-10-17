@@ -2,6 +2,8 @@ import { createMovieCard } from "../movies/movieCard";
 import { attachOnloadToCards } from "../movies/moviesList";
 import PaginationLibrary from "../paginationLibrary/paginationLibrary";
 import { isHome } from "../init";
+import { nextCard } from "../movies/nextCard";
+import { debounce } from "lodash";
 
 const instPagination = new PaginationLibrary(9);
 instPagination.paginationContainer = "paginationLibrary";
@@ -20,29 +22,22 @@ const refs = {
         gallery: document.querySelector(".movies-section__grid"),
 };
 
-// Medias
-const sq = window.matchMedia("screen and (max-width: 767px)");
-const lq = window.matchMedia("screen and (min-width: 1200px)");
-
 // Resize pagination on mobile and tablet
-sq.addEventListener("change", (event) => {
-        if (!isHome) {
-                let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
-                instPagination.per_Page = perPage;
-                instPagination.adjastment = adjustment;
-                instPagination.update();
-        }
-});
-
-// Resize pagination on tablet and desktop
-lq.addEventListener("change", (event) => {
-        if (!isHome) {
-                let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
-                instPagination.per_Page = perPage;
-                instPagination.adjastment = adjustment;
-                instPagination.update();
-        }
-});
+window.addEventListener(
+        "resize",
+        debounce((event) => {
+                if (!isHome) {
+                        let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
+                        instPagination.per_Page = perPage;
+                        instPagination.adjastment = adjustment;
+                        if (refs.watchedBtn.classList.contains("library-btn--active")) {
+                                instPagination.action(instPagination.current, showWatchedFilms);
+                        } else {
+                                instPagination.action(instPagination.current, showQueuedFilms);
+                        }
+                }
+        }, 500),
+);
 
 function calculateAdjustmentBasedOnInnerWidth() {
         if (window.innerWidth > 0 && window.innerWidth < 768) {
@@ -59,6 +54,27 @@ function calculateAdjustmentBasedOnInnerWidth() {
 function handleShowWatchedFilms() {
         instPagination.current = 1;
         showWatchedFilms();
+}
+
+function nextPageShowWatchedFilms() {
+        instPagination.action(instPagination.current + 1, showWatchedFilms);
+}
+
+function nextPageShowQueuedFilms() {
+        instPagination.action(instPagination.current + 1, showQueuedFilms);
+}
+
+function insertNextPage(funcOnClick) {
+        if (instPagination.getAdjastment() === 11) {
+                refs.gallery.insertAdjacentHTML("beforeend", nextCard);
+
+                const nextCardDiv = document.querySelector(".next-card");
+                nextCardDiv.style.display = "block";
+                const nextCardImg = document.querySelector(".next-card__image");
+                nextCardImg.style.width = "336px";
+                const nextBtn = document.querySelector(".next-card__container");
+                nextBtn.addEventListener("click", funcOnClick);
+        }
 }
 
 // Watched
@@ -78,12 +94,15 @@ function showWatchedFilms() {
                 const markup = renderWatchedFilms(watchedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
 
+                insertNextPage(nextPageShowWatchedFilms);
+
                 // Get all cards
                 const cards = document.querySelectorAll(".movies-section__card");
 
                 // Add events to cards
                 attachOnloadToCards(cards);
         } catch (error) {
+                console.log(error);
                 displayMessage();
         }
 }
@@ -139,6 +158,7 @@ function showQueuedFilms() {
                 const markup = renderQueuedFilms(queuedFilms);
                 refs.gallery.insertAdjacentHTML("beforeend", markup);
 
+                insertNextPage(nextPageShowQueuedFilms);
                 // Get all cards
                 const cards = document.querySelectorAll(".movies-section__card");
 
