@@ -6,7 +6,7 @@ const refs = {
         openTrailerBtn: document.querySelector(".modal-detail__trailer-btn"),
         backdropTrailer: undefined,
         youtubeIconOnPoster: document.querySelector(".modal-detail__youtube-link"),
-        modalDetailElem: document.querySelector(".modal-detail"),
+        mainBackdrop: document.querySelector(".backdrop"),
 };
 
 // Youtube component
@@ -39,7 +39,7 @@ export function initTrailer(trailersList) {
 
         // Return
         if (!trailer) return;
-        
+
         // Enable buttons if trailer is founded
         refs.openTrailerBtn.removeAttribute("disabled");
         refs.youtubeIconOnPoster.style.display = "block";
@@ -49,19 +49,19 @@ export function initTrailer(trailersList) {
 }
 
 // Check trailer window status
-export function checkStatusTrailer() {        
+export function checkStatusTrailer() {
         return refs.backdropTrailer;
 }
 
 // Deattach event
-export function deattachTrailer() {        
+export function deattachTrailer() {
         refs.openTrailerBtn.removeEventListener("click", openVideoTrailer);
 }
 
 // Handle to open trailer
 export function openVideoTrailer() {
         // Add player components in DOM
-        refs.modalDetailElem.insertAdjacentHTML("beforeend", youtubePlayerComponent(trailer));
+        refs.mainBackdrop.insertAdjacentHTML("beforeend", youtubePlayerComponent(trailer));
 
         // Get ref to player
         refs.backdropTrailer = document.querySelector(".backdrop__trailer");
