@@ -65,7 +65,7 @@
     }
 
     &__close-icon {
-        stroke: #000;
+        stroke: grey;
     }
 
     &__close-icon:hover {
@@ -232,7 +232,7 @@
 
     &__trailer-btn:disabled {
         color: #808080;
-        border-color: #808080;
+        border-color: #808080;  
     }
 
     @media (hover: hover) {
@@ -243,7 +243,7 @@
             border-bottom: none;
 
             background: $modal-detail-btn-hover-bg;
-            // border: 1px solid $modal-detail-btn-hover-bg;
+            border: 1px solid $modal-detail-btn-hover-bg;
             color: $modal-detail-btn-hover-color;
             cursor: pointer;
             transition: 0.2s $timing-function;
