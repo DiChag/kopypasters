@@ -6,7 +6,7 @@ import {
         showQueuedFilms,
         showWatchedFilms,
 } from "../library/library";
-import { checkStatusTrailer, deattachTrailer, initTrailer, openVideoTrailer } from "./trailer";
+import { checkStatusTrailer, closeTrailerWindow, deattachTrailer, initTrailer, openVideoTrailer } from "./trailer";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
@@ -298,7 +298,7 @@ function closeModal(e) {
 
         // If opened trailer video - close it
         if (checkStatusTrailer()) {
-                openVideoTrailer(false);
+                closeTrailerWindow();
                 return;
         }
 
