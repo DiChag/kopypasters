@@ -278,26 +278,23 @@ function checkLibrary(id) {
 // Close modal
 function closeModal(e) {
         // Keyboard event
+        // prettier-ignore
         if (e.type === "keydown") {
                 // Not escape
                 if (e.keyCode !== 27) {
                         return;
                 }
-        }
-
+        } else
         // Mouse event
-        else {
-                // Closest parent is "button" and class is "backdrop"
-                if (!e.target.closest("button") && !e.target.classList.contains("backdrop")) {
-                        return;
-                }
+        
+        // not backdrops
+        if (!e.target.classList.contains("backdrop") && !e.target.classList.contains("backdrop__trailer"))        
+        // if closest elem target is not button = false -> check contains class
+        if (e.target.closest("button") === null || !e.target.closest("button").classList.contains("modal-detail__close-button")) return;
 
-                // Not close buttons
-                if (e.target.classList.contains("modal-detail__btn")) return;
-        }
-
-        // If opened trailer video - close it
+        // If trailer is open
         if (checkStatusTrailer()) {
+                // If opened trailer video - close it
                 closeTrailerWindow();
                 return;
         }
