@@ -4,56 +4,81 @@ let trailer;
 // References to elements
 const refs = {
         openTrailerBtn: document.querySelector(".modal-detail__trailer-btn"),
-        backdropTrailer: document.querySelector(".backdrop_trailer"),
+        backdropTrailer: undefined,
         youtubeIconOnPoster: document.querySelector(".modal-detail__youtube-link"),
+        modalDetailElem: document.querySelector(".modal-detail"),
 };
 
+// Youtube component
+function youtubePlayerComponent(trailer) {
+        return `
+                <div class="backdrop__trailer">
+                        <iframe
+                                class="iframe-window"
+                                width="560"
+                                height="315"
+                                title="YouTube video player"
+                                style="border: 0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                src="${trailer}"
+                        >
+                        </iframe>
+                </div>
+        `;
+}
+
+// Init trailer
 export function initTrailer(trailersList) {
-        // Film trailer
+        // Default buttons is disabled
+        refs.openTrailerBtn.setAttribute("disabled", true);
+        refs.youtubeIconOnPoster.style.display = "none";
+
+        // Try get the film's trailer
         trailer = parseTrailers(trailersList);
-        trailer && refs.youtubeIconOnPoster.setAttribute("href", trailer);
 
-        // YouTube link for video trailer
-        refs.backdropTrailer.firstElementChild.src = trailer;
+        // Return
+        if (!trailer) return;
+        
+        // Enable buttons if trailer is founded
+        refs.openTrailerBtn.removeAttribute("disabled");
+        refs.youtubeIconOnPoster.style.display = "block";
 
-        // listeners for openTrailerBtn and backdrop
+        // listener for trailer button
         refs.openTrailerBtn.addEventListener("click", openVideoTrailer);
-        refs.backdropTrailer.addEventListener("click", closeTrailerWindow);
 }
 
 // Check trailer window status
-export function checkStatusTrailer() {
-        return !refs.backdropTrailer.classList.contains("unshown");
+export function checkStatusTrailer() {        
+        return refs.backdropTrailer;
 }
 
-export function deattachTrailer() {
-        // Deattach events
+// Deattach event
+export function deattachTrailer() {        
         refs.openTrailerBtn.removeEventListener("click", openVideoTrailer);
-        refs.backdropTrailer.removeEventListener("click", closeTrailerWindow);
 }
 
-// function that opens and close video trailer
-export function openVideoTrailer(bool) {
-        if (bool) {
-                refs.backdropTrailer.classList.remove("unshown");
-                refs.backdropTrailer.firstElementChild.src = trailer;
-        } else {
-                refs.backdropTrailer.classList.add("unshown");                
-        }
+// Handle to open trailer
+export function openVideoTrailer() {
+        // Add player components in DOM
+        refs.modalDetailElem.insertAdjacentHTML("beforeend", youtubePlayerComponent(trailer));
+
+        // Get ref to player
+        refs.backdropTrailer = document.querySelector(".backdrop__trailer");
+
+        // Set href to button on the poster
+        trailer && refs.youtubeIconOnPoster.setAttribute("href", trailer);
 }
 
-// function that closes videoTrailer
-function closeTrailerWindow() {
-        refs.backdropTrailer.classList.add("unshown");
-        refs.backdropTrailer.firstElementChild.src = "";
+// Close trailer
+export function closeTrailerWindow() {
+        refs.backdropTrailer.remove();
+        refs.backdropTrailer = undefined;
 }
 
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
         let videoByOfficialTrailer, videoByTrailer, otherVideo;
-        // Default button is disabled
-        refs.openTrailerBtn.setAttribute("disabled", true);
-        refs.youtubeIconOnPoster.style.display = "none";
 
         if (trailersList.length === 0) {
                 return;
@@ -73,8 +98,6 @@ function parseTrailers(trailersList) {
         }
 
         if (videoByOfficialTrailer || videoByTrailer || otherVideo) {
-                refs.openTrailerBtn.removeAttribute("disabled");
-                refs.youtubeIconOnPoster.style.display = "block";
                 return `${YOUTUBE_URL}${videoByOfficialTrailer || videoByTrailer || otherVideo}`;
         }
 }
