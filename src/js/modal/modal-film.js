@@ -6,7 +6,7 @@ import {
         showQueuedFilms,
         showWatchedFilms,
 } from "../library/library";
-import { checkStatusTrailer, closeTrailerWindow, deattachTrailer, initTrailer, openVideoTrailer } from "./trailer";
+import { checkStatusTrailer, closeTrailerWindow, deattachTrailer, initTrailer } from "./trailer";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
