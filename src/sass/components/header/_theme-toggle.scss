@@ -120,6 +120,12 @@ body.dark-theme {
         color: #fff;
         font-weight: bold;
     }
+
+     & .modal-detail__trailer-btn:disabled {
+            color: #808080;
+            background-color: none;
+        }
+
     & .modal-detail__btn--active {
         color: $modal-detail-btn-hover-bg;
         font-size: bold;
