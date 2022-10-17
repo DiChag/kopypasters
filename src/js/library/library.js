@@ -25,16 +25,12 @@ const refs = {
 // Resize pagination on mobile and tablet
 window.addEventListener(
         "resize",
-        debounce((event) => {
+        debounce(() => {
                 if (!isHome) {
                         let { perPage, adjustment } = calculateAdjustmentBasedOnInnerWidth();
                         instPagination.per_Page = perPage;
                         instPagination.adjastment = adjustment;
-                        if (refs.watchedBtn.classList.contains("library-btn--active")) {
-                                instPagination.action(instPagination.current, showWatchedFilms);
-                        } else {
-                                instPagination.action(instPagination.current, showQueuedFilms);
-                        }
+                        instPagination.update();
                 }
         }, 500),
 );
